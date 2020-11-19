@@ -24,10 +24,11 @@ module.exports = () => {
                     use: "ts-loader",
                     exclude: /node_modules/,
                 },
-                /* {
+                {
                     test: /\.css$/,
                     use: ["style-loader", "css-loader"],
-                },
+                }
+                /* 
                 {
                     test: /\.(png|j?g|svg|gif)?$/,
                     use: "file-loader",
