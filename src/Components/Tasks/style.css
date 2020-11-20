@@ -1,0 +1,93 @@
+.mainStyleViewTask {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    align-items: center;
+}
+
+.cardStyleTask {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    min-width: 400px;
+    border: 1px solid rgba(34, 34, 34, 0.05);
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.btnNewTask {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 15px;
+    color: white;
+    background: green;
+    padding: 5px;
+    border-radius: 4px;
+    border: 0;
+}
+
+.btnNewTaskEdit {
+    position: relative;
+    margin-right: 15px;
+    color: white;
+    background: green;
+    padding: 5px;
+    border-radius: 4px;
+    border: 0;
+}
+
+.btnNewTaskDel {
+    position: relative;
+    margin-right: 15px;
+    color: white;
+    background: red;
+    padding: 5px;
+    border-radius: 4px;
+    border: 0;
+}
+
+.listViewStyleTasks {
+    margin-top: 50px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.boxInputTask {
+    margin-top: 10px;
+}
+
+.mainNewTaskStyle {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    flex: 1;
+}
+
+.btnNewTaskPlus {
+    color: white;
+    background: green;
+    max-width: 200px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.inputStyleNameTask {
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 200px;
+    outline: none;
+}
+
+.styleTitleTasks {
+    text-align: center;
+    margin-bottom: 10px;
+}
