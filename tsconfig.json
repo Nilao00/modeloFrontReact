@@ -9,9 +9,9 @@
       "jsx": "react",
       "moduleResolution": "node",
       // "rootDir": "src",
-      "noImplicitReturns": true,
+     // "noImplicitReturns": true,
       "noImplicitThis": true,
-      "noImplicitAny": true,
+     // "noImplicitAny": true,
       "strictNullChecks": true,
       "esModuleInterop": true
   },

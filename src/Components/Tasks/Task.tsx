@@ -1,115 +1,53 @@
 import * as React from "react";
 import { TaskProps, Task } from "../../Interfaces/Task";
 import moment from "moment";
-import Repository from "../Repository/Task";
-import NewTask from "./NewTask";
 import "./style.css";
+import { useHistory } from "react-router-dom";
+import Repository from "../Repository/Task";
 
 const Tasks: React.FC<TaskProps> = () => {
-  //const [task, setTask] = React.useState(Repository);
-  const [showCreateTask, setShowCreateTask] = React.useState<boolean>(false);
-  const [, updateState] = React.useState<{}>();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
-  const [name, setName] = React.useState<string>("");
-
-  function getTask() {
-    forceUpdate();
-    return Repository;
-  }
-
-  function newTaskCreate(taskCreate: Task) {
-    Repository.push(taskCreate);
-    setName('');
-    return Repository;
-  }
-
-  function checkFieldNameTask() {
-    if (name === "") return alert("Preencha o campo nome");
-    let objCreateTask: Task = {
-      id: Math.floor(Math.random() * 999),
-      name,
-      finish: false,
-      dtCreate: new Date(),
-    };
-    newTaskCreate(objCreateTask);
-    forceUpdate();
-    return Repository;
-  }
-
-  /*  function getTaskById(id: Number) {
-    Repository.map((elements) => {
-      if (elements.id === id) {
-        return elements;
-      }
-      return task;
-    });
-  } */
-
-  function updateTask(id: Number) {
-    Repository.map((elements) => {
-      if (elements.id === id) {
-        elements.finish = !elements.finish;
-      }
-    });
-    forceUpdate();
-    return Repository;
-  }
+  const [task, setTask] = React.useState<Task[]>(Repository);
+  const history = useHistory();
 
   function deleteTask(id: Number) {
     const confirmDel = confirm("Deseja excluir essa tarefa?");
     if (confirmDel) {
-      Repository.map((elements) => {
-        if (id === elements.id) {
-          //@ts-ignore
-          Repository.splice(Repository.indexOf(elements), 1);
-          forceUpdate();
-          return elements;
+      const response = task.filter((elements) => {
+        if (elements.id === id) {
+          return false;
         }
-        return null;
+        return true;
       });
+      setTask(response);
     }
   }
 
-  React.useEffect(() => {
-    getTask();
-  }, [Repository]);
-
   return (
     <div className="mainStyleViewTask">
-      <span className="boxInputTask">
-        {showCreateTask && (
-          <div className="mainNewTaskStyle">
-            <input
-              type="text"
-              value={name}
-              onChange={(value) => setName(value.target.value)}
-              placeholder={"Nova tarefa..."}
-              className="inputStyleNameTask"
-            />
-            <button
-              onClick={() => checkFieldNameTask()}
-              className="btnNewTaskPlus"
-            >
-              Nova Tarefa
-            </button>
-          </div>
-        )}
-      </span>
       <div className="listViewStyleTasks">
         <h3 className="styleTitleTasks">Listagem de tarefas</h3>
-        {Repository.length > 0
-          ? Repository.map((itens, index) => {
+        {task.length > 0
+          ? task.map((itens, index) => {
               return (
                 <div className="cardStyleTask" key={index}>
                   <span style={{ wordBreak: "break-word", maxWidth: 80 }}>
-                    {itens.id + " - " + itens.name}
+                    {itens.id +
+                      " - " +
+                      itens.name +
+                      " - " +
+                      (itens.finish ? "Atividade feita" : "Não feita")}
                   </span>
                   <span>{moment(itens.dtCreate).format("DD/MM/YYYY")}</span>
                   <button
-                    onClick={() => updateTask(itens.id)}
+                    onClick={() => {
+                      history.push("/updateTask", [
+                        { taskAny: itens },
+                        { task },
+                      ]);
+                    }}
                     className="btnNewTaskEdit"
                   >
-                    {!itens.finish ? "Não feita" : "Feita"}
+                    Editar
                   </button>
                   <button
                     onClick={() => deleteTask(itens.id)}
@@ -125,9 +63,11 @@ const Tasks: React.FC<TaskProps> = () => {
       <div>
         <button
           className="btnNewTask"
-          onClick={() => setShowCreateTask(!showCreateTask)}
+          onClick={() => {
+            history.push("/newTask", { task });
+          }}
         >
-          {!showCreateTask ? "Novo" : "Cancelar"}
+          Nova tarefa
         </button>
       </div>
     </div>

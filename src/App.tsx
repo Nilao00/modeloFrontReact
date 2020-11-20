@@ -1,10 +1,9 @@
 import * as React from "react";
 import "./styles/global.css";
-import Tasks from "./Components/Tasks/Task";
-import { Task, TaskProps } from "./Interfaces/Task";
+import Router from "./Routers";
 
 const App: React.FC = () => {
-  return <Tasks tasks={[]} />;
+  return <Router />;
 };
 
 export default App;

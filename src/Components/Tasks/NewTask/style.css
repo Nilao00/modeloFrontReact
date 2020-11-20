@@ -22,3 +22,7 @@
     max-width: 200px;
     outline: none;
 }
+
+.boxInputTask {
+    margin-top: 10px;
+}

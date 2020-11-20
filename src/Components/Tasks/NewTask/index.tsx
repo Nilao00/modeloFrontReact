@@ -1,15 +1,21 @@
 import * as React from "react";
-import { Task, TaskProps, PropsMethods } from "../../../Interfaces/Task";
+import { Task, TaskProps } from "../../../Interfaces/Task";
 import "./style.css";
+import { useHistory } from "react-router-dom";
 
-const NewTask: React.FC<TaskProps> = ({ tasks }) => {
+const NewTask: React.FC<TaskProps[]> = (props) => {
+  //@ts-ignore
+  const [task, setTask] = React.useState<Task[]>(props.location.state.task);
   const [name, setName] = React.useState<string>("");
-  const [, updateState] = React.useState<{}>();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
+  const history = useHistory();
 
   function newTaskCreate(taskCreate: Task) {
-    tasks.push(taskCreate);
-    return tasks;
+    let arr = task;
+    arr.push(taskCreate);
+    setTask(arr);
+    //@ts-ignore
+
+    history.goBack();
   }
 
   function checkFieldNameTask() {
@@ -21,23 +27,25 @@ const NewTask: React.FC<TaskProps> = ({ tasks }) => {
       dtCreate: new Date(),
     };
     newTaskCreate(objCreateTask);
-    forceUpdate();
-    return tasks;
   }
 
   return (
-    <div className="mainNewTaskStyle">
-      <input
-        type="text"
-        value={name}
-        onChange={(value) => setName(value.target.value)}
-        placeholder={"Nova tarefa..."}
-        className="inputStyleNameTask"
-      />
-      <button onClick={() => checkFieldNameTask()} className="btnNewTaskPlus">
-        Nova Tarefa
-      </button>
-    </div>
+    <span className="boxInputTask">
+      <h3 className="styleTitleTasks">Criar tarefa</h3>
+      <div className="mainNewTaskStyle">
+        <input
+          type="text"
+          value={name}
+          onChange={(value) => setName(value.target.value)}
+          placeholder={"Nova tarefa..."}
+          className="inputStyleNameTask"
+        />
+        <button onClick={() => checkFieldNameTask()} className="btnNewTaskPlus">
+          Nova Tarefa
+        </button>
+      </div>
+    </span>
   );
 };
+
 export default NewTask;
