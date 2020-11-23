@@ -25,12 +25,11 @@ const UpdateTaskContainer: React.FC = () => {
   }
 
   function getTaskById() {
-    task.map((itens) => {
-      if (itens.id === Number(id)) {
-        setName(itens.name);
-        setFinishTask(itens.finish ? 1 : 0);
-      }
-    });
+    let taskEditedCurrent = task.find((itens) => itens.id === Number(id));
+    if (taskEditedCurrent) {
+      setName(taskEditedCurrent.name);
+      setFinishTask(taskEditedCurrent.finish ? 1 : 0);
+    }
   }
   return (
     <UpdateTask

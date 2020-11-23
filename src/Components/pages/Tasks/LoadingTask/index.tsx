@@ -8,6 +8,7 @@ import { useConfigContext } from "../../../../Context/taskContext";
 import "../style.css";
 
 const Tasks: React.FC = () => {
+  
   const { deleteTask, task } = useConfigContext();
   const history = useHistory();
 

@@ -40,10 +40,10 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
             setFinishTask(parseInt(finish.target.value));
           }}
         >
-          <option value={1} selected={finishTask === 1}>
+          <option value={1} selected={finishTask === 1 ? true : false}>
             Atividade feita
           </option>
-          <option value={0} selected={finishTask === 0}>
+          <option value={0} selected={finishTask === 0 ? true : false}>
             Atividade não feita
           </option>
         </select>

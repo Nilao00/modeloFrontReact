@@ -5,7 +5,7 @@ import { Task } from "../../../../Interfaces/Task";
 import { useConfigContext } from "../../../../Context/taskContext";
 import NewTask from "./";
 
-const newTaskContainer: React.FC = () => {
+const NewTaskContainer: React.FC = () => {
   const history = useHistory();
   const [name, setName] = useState<string>("");
 
@@ -40,4 +40,4 @@ const newTaskContainer: React.FC = () => {
   );
 };
 
-export default newTaskContainer;
+export default NewTaskContainer;

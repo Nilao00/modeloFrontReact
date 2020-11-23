@@ -1,7 +1,10 @@
 import React from "react";
-import "./styles/global.css";
+
 import Routes from "./routes";
 import { ConfigContextProvider } from "./Context/taskContext";
+
+import "./styles/global.css";
+
 const App: React.FC = () => {
   return (
     <ConfigContextProvider>
