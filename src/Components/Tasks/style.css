@@ -25,31 +25,43 @@
     bottom: 0;
     right: 0;
     margin-right: 15px;
+    margin-bottom: 15px;
     color: white;
     background: green;
-    padding: 5px;
+    padding: 10px;
     border-radius: 4px;
     border: 0;
+    cursor: pointer;
+}
+
+.btnNewTask:focus {
+    outline: none;
 }
 
 .btnNewTaskEdit {
     position: relative;
-    margin-right: 15px;
+    margin-right: 10px;
     color: white;
     background: green;
     padding: 5px;
     border-radius: 4px;
     border: 0;
+    cursor: pointer;
+}
+
+.btnNewTaskEdit:focus {
+    outline: none;
 }
 
 .btnNewTaskDel {
     position: relative;
-    margin-right: 15px;
+    margin-right: 10px;
     color: white;
     background: red;
     padding: 5px;
     border-radius: 4px;
     border: 0;
+    cursor: pointer;
 }
 
 .listViewStyleTasks {
@@ -79,6 +91,7 @@
     margin-top: 10px;
     border-radius: 8px;
 }
+
 
 .inputStyleNameTask {
     padding: 10px;
