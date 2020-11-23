@@ -1,39 +1,24 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
-
-import { Task } from "../../../../Interfaces/Task";
-import { useConfigContext } from "../../../../Context/taskContext";
 
 import "./style.css";
 
-const UpdateTask: React.FC = () => {
-  const { id }: { id: string } = useParams();
-  const [name, setName] = React.useState<string>("");
-  const [finishTask, setFinishTask] = React.useState<number>(0);
-  const history = useHistory();
-  const { updateTask, task } = useConfigContext();
-
-  function updateTaskResponse() {
-    let done = finishTask === 1 ? true : false;
-    let objUp: Task = {
-      id: Number(id),
-      name,
-      finish: done,
-      dtCreate: new Date(),
-    };
-    updateTask(Number(id), objUp);
-    history.push("/");
-  }
-
-  function getTaskById() {
-    task.map((itens) => {
-      if (itens.id === Number(id)) {
-        setName(itens.name);
-        setFinishTask(itens.finish ? 1 : 0);
-      }
-    });
-  }
-
+interface TaskUpdateContainer {
+  name: string;
+  setName: any;
+  finishTask: number;
+  setFinishTask: any;
+  getTaskById(): void;
+  updateTaskResponse(): void;
+}
+const UpdateTask: React.FC<TaskUpdateContainer> = ({
+  name,
+  setName,
+  finishTask,
+  setFinishTask,
+  getTaskById,
+  updateTaskResponse,
+}) => {
+  
   React.useEffect(() => {
     getTaskById();
   }, []);
@@ -55,8 +40,12 @@ const UpdateTask: React.FC = () => {
             setFinishTask(parseInt(finish.target.value));
           }}
         >
-          <option value={1} selected={finishTask === 1}>Atividade feita</option>
-          <option value={0} selected={finishTask === 0}>Atividade não feita</option>
+          <option value={1} selected={finishTask === 1}>
+            Atividade feita
+          </option>
+          <option value={0} selected={finishTask === 0}>
+            Atividade não feita
+          </option>
         </select>
 
         <button onClick={updateTaskResponse} className="btnNewTaskPlus">

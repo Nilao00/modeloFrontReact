@@ -1,35 +1,16 @@
-import React, { useRef } from "react";
-
-import { useHistory } from "react-router-dom";
-
-import { Task } from "../../../../Interfaces/Task";
-import { useConfigContext } from "../../../../Context/taskContext";
-
+import React, { useRef, useState } from "react";
 import "./style.css";
 
-const NewTask: React.FC = () => {
-  const history = useHistory();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { createTask } = useConfigContext();
-
-  function taskCreateResponse() {
-    const objCreateTask: Task = {
-      id: Math.floor(Math.random() * 999),
-      name: inputRef.current?.value || "",
-      finish: false,
-      dtCreate: new Date(),
-    };
-    createTask(objCreateTask);
-    history.push("/");
-  }
-
-  function checkFieldNameTask() {
-    if (inputRef.current?.value === "") {
-      return (inputRef.current.style.border = "1px solid red");
-    }
-    return taskCreateResponse();
-  }
-
+interface ContainerTask {
+  checkFieldNameTask(name: string): void;
+  name: string;
+  setName: any;
+}
+const NewTask: React.FC<ContainerTask> = ({
+  checkFieldNameTask,
+  name,
+  setName,
+}) => {
   return (
     <div className="boxInputTask">
       <h3 className="styleTitleTasks">Criar tarefa</h3>
@@ -38,9 +19,15 @@ const NewTask: React.FC = () => {
           type="text"
           placeholder={"Nova tarefa..."}
           className="inputStyleNameTask"
-          ref={inputRef}
+          value={name}
+          onChange={(val) => setName(val.target.value)}        
         />
-        <button onClick={checkFieldNameTask} className="btnNewTaskPlus">
+        <button
+          onClick={() => {
+            checkFieldNameTask(name);
+          }}
+          className="btnNewTaskPlus"
+        >
           Nova Tarefa
         </button>
       </div>
