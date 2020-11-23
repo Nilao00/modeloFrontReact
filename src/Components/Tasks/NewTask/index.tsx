@@ -10,12 +10,11 @@ const NewTask: React.FC<TaskProps[]> = (props) => {
   const history = useHistory();
 
   function newTaskCreate(taskCreate: Task) {
-    let arr = task;
-    arr.push(taskCreate);
-    setTask(arr);
+    task.push(taskCreate);
+    setTask(task)
+  //  setTask([...task, taskCreate]);
     //@ts-ignore
-
-    history.goBack();
+   history.goBack();
   }
 
   function checkFieldNameTask() {
