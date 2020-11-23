@@ -1,49 +1,47 @@
 import * as React from "react";
-import { Task, TaskProps } from "../../../Interfaces/Task";
-import "./style.css";
 import { useHistory } from "react-router-dom";
+import { Task } from "../../../Interfaces/Task";
+import { useConfigContext } from "../../../Context/taskContext";
+import "./style.css";
 
-const NewTask: React.FC<TaskProps[]> = (props) => {
-  //@ts-ignore
-  const [task, setTask] = React.useState<Task[]>(props.location.state.task);
-  const [name, setName] = React.useState<string>("");
+const NewTask: React.FC = () => {
   const history = useHistory();
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const { newTaskCreate } = useConfigContext();
 
-  function newTaskCreate(taskCreate: Task) {
-    task.push(taskCreate);
-    setTask(task)
-  //  setTask([...task, taskCreate]);
-    //@ts-ignore
-   history.goBack();
-  }
-
-  function checkFieldNameTask() {
-    if (name === "") return alert("Preencha o campo nome");
-    let objCreateTask: Task = {
+  function newTaskCreateResponse() {
+    const objCreateTask: Task = {
       id: Math.floor(Math.random() * 999),
-      name,
+      name: inputRef.current?.value || "",
       finish: false,
       dtCreate: new Date(),
     };
     newTaskCreate(objCreateTask);
+    history.push("/");
+  }
+
+  function checkFieldNameTask() {
+    if (inputRef.current?.value === "") {
+      return (inputRef.current.style.border = "1px solid red");
+    }
+    return newTaskCreateResponse();
   }
 
   return (
-    <span className="boxInputTask">
+    <div className="boxInputTask">
       <h3 className="styleTitleTasks">Criar tarefa</h3>
       <div className="mainNewTaskStyle">
         <input
           type="text"
-          value={name}
-          onChange={(value) => setName(value.target.value)}
           placeholder={"Nova tarefa..."}
           className="inputStyleNameTask"
+          ref={inputRef}
         />
-        <button onClick={() => checkFieldNameTask()} className="btnNewTaskPlus">
+        <button onClick={checkFieldNameTask} className="btnNewTaskPlus">
           Nova Tarefa
         </button>
       </div>
-    </span>
+    </div>
   );
 };
 

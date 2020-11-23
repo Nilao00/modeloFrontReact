@@ -1,6 +1,6 @@
 export interface Task {
-  id: Number;
-  name: String;
+  id: number;
+  name: string;
   finish: boolean;
   dtCreate: Date;
 }
@@ -10,8 +10,9 @@ export interface TaskProps {
 }
 
 export interface PropsMethods {
-  newTaskCreate(taskCreate: Task): Task;
-  getTaskById(id: Number): Task;
-  updateTask(id: Number, taskUpdate: Task): Task;
-  deleteTask(id: Number): Task;
+  task: Task[];
+  newTaskCreate(taskCreate: Task): void;
+  getTasks(): Task[];
+  updateTask(id: number, taskUpdate: Task): void;
+  deleteTask(id: number): void;
 }
