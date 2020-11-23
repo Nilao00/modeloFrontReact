@@ -1,11 +1,11 @@
-import * as React from "react";
+import React from "react";
 import "./styles/global.css";
-import Router from "./Routers";
+import Routes from "./routes";
 import { ConfigContextProvider } from "./Context/taskContext";
 const App: React.FC = () => {
   return (
     <ConfigContextProvider>
-      <Router />
+      <Routes />
     </ConfigContextProvider>
   );
 };

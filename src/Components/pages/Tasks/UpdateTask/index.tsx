@@ -1,16 +1,17 @@
-import * as React from "react";
+import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Task } from "../../../Interfaces/Task";
-import { useConfigContext } from "../../../Context/taskContext";
+
+import { Task } from "../../../../Interfaces/Task";
+import { useConfigContext } from "../../../../Context/taskContext";
+
 import "./style.css";
 
-const UpdateTaskView: React.FC = () => {
+const UpdateTask: React.FC = () => {
   const { id }: { id: string } = useParams();
   const [name, setName] = React.useState<string>("");
   const [finishTask, setFinishTask] = React.useState<number>(0);
-  const [objUpdate, setObjUpdate] = React.useState<Task>({} as Task);
   const history = useHistory();
-  const { updateTask, getTasks } = useConfigContext();
+  const { updateTask, task } = useConfigContext();
 
   function updateTaskResponse() {
     let done = finishTask === 1 ? true : false;
@@ -25,11 +26,10 @@ const UpdateTaskView: React.FC = () => {
   }
 
   function getTaskById() {
-    getTasks().map((itens) => {
+    task.map((itens) => {
       if (itens.id === Number(id)) {
         setName(itens.name);
         setFinishTask(itens.finish ? 1 : 0);
-        setObjUpdate(itens);
       }
     });
   }
@@ -66,4 +66,4 @@ const UpdateTaskView: React.FC = () => {
     </span>
   );
 };
-export default UpdateTaskView;
+export default UpdateTask;

@@ -1,13 +1,23 @@
-import * as React from "react";
+import React from "react";
+
 import moment from "moment";
 import { useHistory } from "react-router-dom";
-import { Task } from "../../Interfaces/Task";
-import { useConfigContext } from "../../Context/taskContext";
-import "./style.css";
+
+import { useConfigContext } from "../../../../Context/taskContext";
+
+import "../style.css";
 
 const Tasks: React.FC = () => {
   const { deleteTask, task } = useConfigContext();
   const history = useHistory();
+
+  function getItenForUpdate(id: number) {
+    return history.push(`updateTask/${id}`);
+  }
+
+  function createNewTask() {
+    return history.push("/newTask");
+  }
 
   return (
     <div className="mainStyleViewTask">
@@ -26,17 +36,13 @@ const Tasks: React.FC = () => {
                   </span>
                   <span>{moment(itens.dtCreate).format("DD/MM/YYYY")}</span>
                   <button
-                    onClick={() => {
-                      history.push(`updateTask/${itens.id}`);
-                    }}
+                    onClick={() => getItenForUpdate(itens.id)}
                     className="btnNewTaskEdit"
                   >
                     Editar
                   </button>
                   <button
-                    onClick={() => {
-                      deleteTask(itens.id);
-                    }}
+                    onClick={() => deleteTask(itens.id)}
                     className="btnNewTaskDel"
                   >
                     Deletar
@@ -47,12 +53,7 @@ const Tasks: React.FC = () => {
           : "Não foram encontrados itens"}
       </div>
       <div>
-        <button
-          className="btnNewTask"
-          onClick={() => {
-            history.push("/newTask", { task });
-          }}
-        >
+        <button className="btnNewTask" onClick={createNewTask}>
           Nova tarefa
         </button>
       </div>
@@ -60,5 +61,4 @@ const Tasks: React.FC = () => {
   );
 };
 
-Tasks.propTypes = {};
 export default Tasks;

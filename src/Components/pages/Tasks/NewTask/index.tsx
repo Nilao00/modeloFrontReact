@@ -1,22 +1,25 @@
-import * as React from "react";
+import React, { useRef } from "react";
+
 import { useHistory } from "react-router-dom";
-import { Task } from "../../../Interfaces/Task";
-import { useConfigContext } from "../../../Context/taskContext";
+
+import { Task } from "../../../../Interfaces/Task";
+import { useConfigContext } from "../../../../Context/taskContext";
+
 import "./style.css";
 
 const NewTask: React.FC = () => {
   const history = useHistory();
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const { newTaskCreate } = useConfigContext();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { createTask } = useConfigContext();
 
-  function newTaskCreateResponse() {
+  function taskCreateResponse() {
     const objCreateTask: Task = {
       id: Math.floor(Math.random() * 999),
       name: inputRef.current?.value || "",
       finish: false,
       dtCreate: new Date(),
     };
-    newTaskCreate(objCreateTask);
+    createTask(objCreateTask);
     history.push("/");
   }
 
@@ -24,7 +27,7 @@ const NewTask: React.FC = () => {
     if (inputRef.current?.value === "") {
       return (inputRef.current.style.border = "1px solid red");
     }
-    return newTaskCreateResponse();
+    return taskCreateResponse();
   }
 
   return (

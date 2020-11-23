@@ -1,16 +1,20 @@
-import * as React from "react";
-import { PropsMethods, Task } from "../Interfaces/Task";
+import React, { useState, createContext, useContext } from "react";
 
-const ConfigContext = React.createContext<PropsMethods>({} as PropsMethods);
+import { Task } from "../Interfaces/Task";
+
+export interface PropsMethods {
+  task: Task[];
+  createTask(taskCreate: Task): void;
+  updateTask(id: number, taskUpdate: Task): void;
+  deleteTask(id: number): void;
+}
+
+const ConfigContext = createContext<PropsMethods>({} as PropsMethods);
 
 export const ConfigContextProvider = ({ children }) => {
-  const [task, setTask] = React.useState<Task[]>([]);
+  const [task, setTask] = useState<Task[]>([]);
 
-  const handleListTasks = (): Task[] => {
-    return task;
-  };
-
-  const handleNewTaskCreate = (taskCreate: Task) => {
+  const handleTaskCreate = (taskCreate: Task) => {
     setTask([...task, taskCreate]);
   };
 
@@ -43,8 +47,7 @@ export const ConfigContextProvider = ({ children }) => {
     <ConfigContext.Provider
       value={{
         task,
-        getTasks: handleListTasks,
-        newTaskCreate: handleNewTaskCreate,
+        createTask: handleTaskCreate,
         updateTask: handleTaskUpdate,
         deleteTask: handleTaskDelete,
       }}
@@ -54,6 +57,6 @@ export const ConfigContextProvider = ({ children }) => {
   );
 };
 export const useConfigContext = () => {
-  const context = React.useContext(ConfigContext);
+  const context = useContext(ConfigContext);
   return context;
 };

@@ -4,15 +4,3 @@ export interface Task {
   finish: boolean;
   dtCreate: Date;
 }
-
-export interface TaskProps {
-  tasks: Task[];
-}
-
-export interface PropsMethods {
-  task: Task[];
-  newTaskCreate(taskCreate: Task): void;
-  getTasks(): Task[];
-  updateTask(id: number, taskUpdate: Task): void;
-  deleteTask(id: number): void;
-}
