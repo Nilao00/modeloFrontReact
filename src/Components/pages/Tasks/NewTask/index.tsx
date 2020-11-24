@@ -52,6 +52,7 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
                   onChange={(val) => setValues({ name: val.target.value })}
                   onBlur={handleBlur}
                   value={values.name}
+                  name="name"
                   autoFocus
                 />
                 {errors.name}
