@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import { LoadingTask, NewTask, UpdateTask } from "./Components/pages/Tasks";
 
 const Routers: React.FC = () => {
