@@ -50,9 +50,6 @@ const NewTask: React.FC<ContainerTask> = ({
                 />
                 {errors.name}
                 <button
-                  onClick={() => {
-                    checkFieldNameTask(name);
-                  }}
                   type="submit"
                   disabled={isSubmitting}
                   className="btnNewTaskPlus"

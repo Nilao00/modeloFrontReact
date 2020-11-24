@@ -19,7 +19,7 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
     <span className="boxInputTask">
       <Formik
         initialValues={{ name, finish }}
-      /*   validate={(values) => {
+        /*   validate={(values) => {
           const errors = { name: "", finish: "" };
           if (!values.name || values.name === "") {
             errors.name = "Por favor preencha o nome";
@@ -73,10 +73,7 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
                   </option>
                 </select>
 
-                <button
-                  onClick={() => updateTaskResponse(values.name, values.finish)}
-                  className="btnNewTaskPlus"
-                >
+                <button type="submit" className="btnNewTaskPlus">
                   Salvar Tarefa
                 </button>
               </div>

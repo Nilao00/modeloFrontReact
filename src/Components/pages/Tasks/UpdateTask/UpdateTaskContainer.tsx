@@ -15,7 +15,7 @@ const UpdateTaskContainer: React.FC = () => {
 
   function updateTaskResponse(name: string, finish: number) {
     if (name === "") {
-      return false
+      return false;
     } else {
       let objUp: Task = {
         id: Number(id),
