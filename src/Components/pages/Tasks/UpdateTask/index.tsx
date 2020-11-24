@@ -32,7 +32,7 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
           setSubmitting(false);
         }}
       >
-        {({ values, setValues, isSubmitting, handleChange, errors }) => (
+        {({ values, setValues, errors }) => (
           <Form>
             <div>
               <h3 className="styleTitleTasks">Editar tarefa</h3>
