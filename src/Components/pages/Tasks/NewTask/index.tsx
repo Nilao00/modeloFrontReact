@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Formik } from "formik";
 
 import "./style.css";
 
 interface ContainerTask {
-  checkFieldNameTask(name: string): void;
+  checkFieldNameTask(name: string): boolean;
 }
 const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
+  const inputRef = useRef<HTMLInputElement>(null); 
+
   return (
     <div className="boxInputTask">
       <Formik
         initialValues={{ name: "" }}
         validate={(values) => {
           const errors = { name: "" };
-          if (!values.name || values.name === '') {
+          if (
+            !values.name ||
+            values.name === "" ||
+            checkFieldNameTask(values.name) === false
+          ) {
             errors.name = "Por favor preencha o nome";
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            checkFieldNameTask(values.name)
+            checkFieldNameTask(values.name);
             setSubmitting(false);
           }, 400);
         }}
@@ -28,30 +34,35 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
         {({
           values,
           setValues,
-          errors,       
+          errors,
           handleBlur,
+          handleChange,
           isSubmitting,
         }) => (
-          <form onSubmit={(e)=> {
-            e.preventDefault();
-            checkFieldNameTask(values.name)
-            }}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              checkFieldNameTask(values.name);
+            }}
+          >
             <div>
-              <h3 className="styleTitleTasks">Criar tarefa</h3>
+             <h3 className="styleTitleTasks">Criar tarefa</h3>
               <div className="mainNewTaskStyle">
                 <input
                   type="text"
                   placeholder={"Nova tarefa..."}
                   className="inputStyleNameTask"
-                  onChange={(val) => setValues({ name: val.target.value })}                  
+                  onChange={(val) => setValues({ name: val.target.value })}
                   onBlur={handleBlur}
                   value={values.name}
+                  ref={inputRef}
+                  autoFocus
                 />
                 {errors.name}
                 <button
-                  /*  onClick=/{() => {
-                  checkFieldNameTask(name);
-                }} */
+                  onClick={() => {
+                    checkFieldNameTask(name);
+                  }}
                   type="submit"
                   disabled={isSubmitting}
                   className="btnNewTaskPlus"

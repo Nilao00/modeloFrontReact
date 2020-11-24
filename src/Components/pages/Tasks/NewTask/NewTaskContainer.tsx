@@ -25,7 +25,8 @@ const NewTaskContainer: React.FC = () => {
     if (name === "" || !name) {
       return false;
     } else {
-      return taskCreateResponse(name);
+      taskCreateResponse(name)
+      return true;
     }
   }
 
