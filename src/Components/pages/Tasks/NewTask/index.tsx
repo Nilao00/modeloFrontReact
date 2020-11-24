@@ -1,36 +1,70 @@
-import React, { useRef, useState } from "react";
+import React from "react";
+import { Formik } from "formik";
+
 import "./style.css";
 
 interface ContainerTask {
   checkFieldNameTask(name: string): void;
-  name: string;
-  setName: any;
 }
-const NewTask: React.FC<ContainerTask> = ({
-  checkFieldNameTask,
-  name,
-  setName,
-}) => {
+const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
   return (
     <div className="boxInputTask">
-      <h3 className="styleTitleTasks">Criar tarefa</h3>
-      <div className="mainNewTaskStyle">
-        <input
-          type="text"
-          placeholder={"Nova tarefa..."}
-          className="inputStyleNameTask"
-          value={name}
-          onChange={(val) => setName(val.target.value)}        
-        />
-        <button
-          onClick={() => {
-            checkFieldNameTask(name);
-          }}
-          className="btnNewTaskPlus"
-        >
-          Nova Tarefa
-        </button>
-      </div>
+      <Formik
+        initialValues={{ name: "" }}
+        validate={(values) => {
+          const errors = { name: "" };
+          if (!values.name || values.name === '') {
+            errors.name = "Por favor preencha o nome";
+          }
+          return errors;
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            checkFieldNameTask(values.name)
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({
+          values,
+          setValues,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          isSubmitting,
+        }) => (
+          <form onSubmit={(e)=> {
+            e.preventDefault();
+            checkFieldNameTask(values.name)
+            }}>
+            <div>
+              <h3 className="styleTitleTasks">Criar tarefa</h3>
+              <div className="mainNewTaskStyle">
+                <input
+                  type="text"
+                  placeholder={"Nova tarefa..."}
+                  className="inputStyleNameTask"
+                  onChange={(val) => setValues({ name: val.target.value })}                  
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                {errors.name}
+                <button
+                  /*  onClick=/{() => {
+                  checkFieldNameTask(name);
+                }} */
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btnNewTaskPlus"
+                >
+                  Nova Tarefa
+                </button>
+              </div>
+            </div>
+          </form>
+        )}
+      </Formik>
     </div>
   );
 };

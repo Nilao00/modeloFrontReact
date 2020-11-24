@@ -7,7 +7,6 @@ import NewTask from "./";
 
 const NewTaskContainer: React.FC = () => {
   const history = useHistory();
-  const [name, setName] = useState<string>("");
 
   const { createTask } = useConfigContext();
 
@@ -24,8 +23,7 @@ const NewTaskContainer: React.FC = () => {
 
   function checkFieldNameTask(name: string) {
     if (name === "" || !name) {
-      //  color = "1px solid red";
-      return alert("Por favor preencha o nome");
+      return false;
     } else {
       return taskCreateResponse(name);
     }
@@ -34,8 +32,6 @@ const NewTaskContainer: React.FC = () => {
   return (
     <NewTask
       checkFieldNameTask={checkFieldNameTask}
-      name={name}
-      setName={setName}
     />
   );
 };
