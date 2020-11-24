@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
+import * as Yup from "yup";
 
 import { Task } from "../../../../Interfaces/Task";
 import { useConfigContext } from "../../../../Context/taskContext";
@@ -7,39 +8,36 @@ import UpdateTask from "./";
 
 const UpdateTaskContainer: React.FC = () => {
   const { id }: { id: string } = useParams();
-  const [name, setName] = React.useState<string>("");
-  const [finishTask, setFinishTask] = React.useState<number>(0);
   const history = useHistory();
   const { updateTask, task } = useConfigContext();
 
-  function updateTaskResponse() {
-    let done = finishTask === 1 ? true : false;
-    let objUp: Task = {
-      id: Number(id),
-      name,
-      finish: done,
-      dtCreate: new Date(),
-    };
-    updateTask(Number(id), objUp);
-    history.push("/");
-  }
+  const taskEditedCurrent = task.find((itens) => itens.id === Number(id));
 
-  function getTaskById() {
-    let taskEditedCurrent = task.find((itens) => itens.id === Number(id));
-    if (taskEditedCurrent) {
-      setName(taskEditedCurrent.name);
-      setFinishTask(taskEditedCurrent.finish ? 1 : 0);
+  function updateTaskResponse(name: string, finish: number) {
+    if (name === "") {
+      return false
+    } else {
+      let objUp: Task = {
+        id: Number(id),
+        name,
+        finish: finish === 1 ? true : false,
+        dtCreate: new Date(),
+      };
+      updateTask(Number(id), objUp);
+      history.push("/");
     }
   }
-  
+
+  const validateForm = Yup.object().shape({
+    name: Yup.string().required("Por favor, preencha o nome"),
+  });
+
   return (
     <UpdateTask
-      name={name}
-      setName={setName}
-      finishTask={finishTask}
-      setFinishTask={setFinishTask}
+      name={taskEditedCurrent ? taskEditedCurrent.name : ""}
+      finish={taskEditedCurrent ? (taskEditedCurrent.finish ? 1 : 0) : 0}
       updateTaskResponse={updateTaskResponse}
-      getTaskById={getTaskById}
+      validateForm={validateForm}
     />
   );
 };

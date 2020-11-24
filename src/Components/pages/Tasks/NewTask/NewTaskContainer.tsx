@@ -23,7 +23,7 @@ const NewTaskContainer: React.FC = () => {
   }
 
   const validateForm = Yup.object().shape({
-    name: Yup.string().min(2, 'Too Short!').required("Required"),
+    name: Yup.string().required("Required"),
   });
 
   function checkFieldNameTask(name: string) {

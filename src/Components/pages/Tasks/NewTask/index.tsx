@@ -24,8 +24,8 @@ const NewTask: React.FC<ContainerTask> = ({
         }}
         validationSchema={validateForm}
         onSubmit={(values, { setSubmitting }) => {
-            checkFieldNameTask(values.name);
-            setSubmitting(false);    
+          checkFieldNameTask(values.name);
+          setSubmitting(false);
         }}
       >
         {({ values, setValues, errors, handleBlur, isSubmitting }) => (
