@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Formik } from "formik";
+import { Formik, Form, Field } from "formik";
 
 import "./style.css";
 
@@ -7,8 +7,6 @@ interface ContainerTask {
   checkFieldNameTask(name: string): boolean;
 }
 const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
-  const inputRef = useRef<HTMLInputElement>(null); 
-
   return (
     <div className="boxInputTask">
       <Formik
@@ -17,18 +15,17 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
           const errors = { name: "" };
           if (
             !values.name ||
-            values.name === "" ||
-            checkFieldNameTask(values.name) === false
+            values.name === "" 
           ) {
             errors.name = "Por favor preencha o nome";
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
+          /* setTimeout(() => {
             checkFieldNameTask(values.name);
             setSubmitting(false);
-          }, 400);
+          }, 400); */
         }}
       >
         {({
@@ -46,16 +43,15 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
             }}
           >
             <div>
-             <h3 className="styleTitleTasks">Criar tarefa</h3>
+              <h3 className="styleTitleTasks">Criar tarefa</h3>
               <div className="mainNewTaskStyle">
-                <input
+                <Field
                   type="text"
                   placeholder={"Nova tarefa..."}
                   className="inputStyleNameTask"
                   onChange={(val) => setValues({ name: val.target.value })}
                   onBlur={handleBlur}
                   value={values.name}
-                  ref={inputRef}
                   autoFocus
                 />
                 {errors.name}
