@@ -19,13 +19,6 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
     <span className="boxInputTask">
       <Formik
         initialValues={{ name, finish }}
-        /*   validate={(values) => {
-          const errors = { name: "", finish: "" };
-          if (!values.name || values.name === "") {
-            errors.name = "Por favor preencha o nome";
-          }
-          return errors;
-        }} */
         validationSchema={validateForm}
         onSubmit={(values, { setSubmitting }) => {
           updateTaskResponse(values.name, values.finish);
