@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Formik, Form, Field } from "formik";
 
 import "./style.css";
@@ -36,7 +36,7 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
           handleChange,
           isSubmitting,
         }) => (
-          <form
+          <Form
             onSubmit={(e) => {
               e.preventDefault();
               checkFieldNameTask(values.name);
@@ -67,7 +67,7 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
                 </button>
               </div>
             </div>
-          </form>
+          </Form>
         )}
       </Formik>
     </div>
