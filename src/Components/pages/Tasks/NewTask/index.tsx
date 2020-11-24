@@ -22,10 +22,10 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          /* setTimeout(() => {
+         setTimeout(() => {
             checkFieldNameTask(values.name);
             setSubmitting(false);
-          }, 400); */
+          }, 400);
         }}
       >
         {({
