@@ -39,6 +39,7 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
           onChange={(finish) => {
             setFinishTask(parseInt(finish.target.value));
           }}
+          defaultValue={finishTask}
         >
           <option value={1} selected={finishTask === 1 ? true : false}>
             Atividade feita

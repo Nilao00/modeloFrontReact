@@ -5,37 +5,30 @@ import "./style.css";
 
 interface ContainerTask {
   checkFieldNameTask(name: string): boolean;
+  validateForm(): void;
 }
-const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
+const NewTask: React.FC<ContainerTask> = ({
+  checkFieldNameTask,
+  validateForm,
+}) => {
   return (
     <div className="boxInputTask">
       <Formik
         initialValues={{ name: "" }}
         validate={(values) => {
           const errors = { name: "" };
-          if (
-            !values.name ||
-            values.name === "" 
-          ) {
+          if (!values.name || values.name === "") {
             errors.name = "Por favor preencha o nome";
           }
           return errors;
         }}
+        validationSchema={validateForm}
         onSubmit={(values, { setSubmitting }) => {
-         setTimeout(() => {
             checkFieldNameTask(values.name);
-            setSubmitting(false);
-          }, 400);
+            setSubmitting(false);    
         }}
       >
-        {({
-          values,
-          setValues,
-          errors,
-          handleBlur,
-          handleChange,
-          isSubmitting,
-        }) => (
+        {({ values, setValues, errors, handleBlur, isSubmitting }) => (
           <Form
             onSubmit={(e) => {
               e.preventDefault();

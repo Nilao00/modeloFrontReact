@@ -31,6 +31,7 @@ const UpdateTaskContainer: React.FC = () => {
       setFinishTask(taskEditedCurrent.finish ? 1 : 0);
     }
   }
+  
   return (
     <UpdateTask
       name={name}

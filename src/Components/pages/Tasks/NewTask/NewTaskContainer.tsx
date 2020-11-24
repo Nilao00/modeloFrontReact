@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import * as Yup from "yup";
 
 import { Task } from "../../../../Interfaces/Task";
 import { useConfigContext } from "../../../../Context/taskContext";
@@ -21,11 +22,15 @@ const NewTaskContainer: React.FC = () => {
     history.push("/");
   }
 
+  const validateForm = Yup.object().shape({
+    name: Yup.string().min(2, 'Too Short!').required("Required"),
+  });
+
   function checkFieldNameTask(name: string) {
     if (name === "" || !name) {
       return false;
     } else {
-      taskCreateResponse(name)
+      taskCreateResponse(name);
       return true;
     }
   }
@@ -33,6 +38,7 @@ const NewTaskContainer: React.FC = () => {
   return (
     <NewTask
       checkFieldNameTask={checkFieldNameTask}
+      validateForm={validateForm}
     />
   );
 };
