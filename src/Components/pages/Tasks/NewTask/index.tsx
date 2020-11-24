@@ -28,9 +28,7 @@ const NewTask: React.FC<ContainerTask> = ({ checkFieldNameTask }) => {
         {({
           values,
           setValues,
-          errors,
-          touched,
-          handleChange,
+          errors,       
           handleBlur,
           isSubmitting,
         }) => (
