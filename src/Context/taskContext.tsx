@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext } from "react";
 
 import { Task } from "../Interfaces/Task";
+import { element } from "prop-types";
 
 export interface PropsMethods {
   task: Task[];
@@ -23,6 +24,7 @@ export const ConfigContextProvider = ({ children }) => {
       if (elements.id === id) {
         elements.name = taskUpdate.name;
         elements.finish = taskUpdate.finish;
+        elements.waytask = taskUpdate.waytask;
         return elements;
       }
       return elements;

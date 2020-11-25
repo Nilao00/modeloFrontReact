@@ -1,27 +1,40 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FieldArray } from "formik";
 
 import "./style.css";
 
+interface Description {
+  description: string;
+}
 interface TaskUpdateContainer {
   name: string;
   finish: number;
-  updateTaskResponse(name: string, finish: number): void;
+  waytask: Description[]
+  updateTaskResponse(
+    name: string,
+    finish: number,
+    waytask: Description[]
+  ): void;
   validateForm(): void;
 }
 const UpdateTask: React.FC<TaskUpdateContainer> = ({
   name,
   finish,
+  waytask,
   updateTaskResponse,
   validateForm,
 }) => {
   return (
     <span className="boxInputTask">
       <Formik
-        initialValues={{ name, finish }}
+        initialValues={{ name, finish, waytask }}
         validationSchema={validateForm}
         onSubmit={(values) => {
-          updateTaskResponse(values.name, Number(values.finish));
+          updateTaskResponse(
+            values.name,
+            Number(values.finish),
+            values.waytask
+          );
         }}
       >
         {({ values, errors, handleChange }) => (
@@ -48,6 +61,40 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
                   Atividade não feita
                 </option>
               </Field>
+              <FieldArray
+                name="waytask"
+                render={({ push, remove }) => (
+                  <div className="elementsMainArrayField">
+                    <button
+                      type="button"
+                      className="btnNewTaskPlus"
+                      onClick={() => push({ description: "" })}
+                    >
+                      Adicionar
+                    </button>
+                    {values.waytask.map((way, index) => (
+                      <div key={index} className="displayElementInfo">
+                        <div className="flexDirectionFieldAndBtnRemove">
+                          <Field
+                            name={`waytask[${index}].description`}
+                            className="inputStyleNameTask"
+                            placeholder="Nova descrição..."
+                            value={way.description}
+                          />
+
+                          <button
+                            type="button"
+                            className="btnNewTaskRemove"
+                            onClick={() => remove(index)}
+                          >
+                            Remover
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              />
               <button type="submit" className="btnNewTaskPlus">
                 Salvar Tarefa
               </button>

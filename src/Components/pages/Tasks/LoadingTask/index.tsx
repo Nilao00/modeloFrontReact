@@ -2,13 +2,12 @@ import React from "react";
 
 import { useHistory } from "react-router-dom";
 
-import formatDate from '../../../../utils';
+import formatDate from "../../../../utils";
 import { useConfigContext } from "../../../../Context/taskContext";
 
 import "../style.css";
 
 const Tasks: React.FC = () => {
-  
   const { deleteTask, task } = useConfigContext();
   const history = useHistory();
 
@@ -34,6 +33,19 @@ const Tasks: React.FC = () => {
                       itens.name +
                       " - " +
                       (itens.finish ? "Atividade feita" : "Não feita")}
+                    {itens.waytask.length > 0 &&
+                      itens.waytask.map((value, i) => {
+                        return (
+                          <div key={i}>
+                            {i < 1 && (
+                              <p style={{ color: "red", fontFamily: '8px' }}>
+                                Descrições:
+                              </p>
+                            )}
+                            <div key={i}>{[value?.description].join(', ')}</div>
+                          </div>
+                        );
+                      })}
                   </span>
                   <span>{formatDate(itens.dtCreate)}</span>
                   <button

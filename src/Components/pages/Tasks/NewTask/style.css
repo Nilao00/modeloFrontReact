@@ -10,10 +10,21 @@
 .btnNewTaskPlus {
     color: white;
     background: green;
-    max-width: 200px;
     padding: 10px;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
+}
+
+.btnNewTaskRemove {
+    color: white;
+    background: red;
+    max-width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    margin-left: 10px;
 }
 
 .inputStyleNameTask {
@@ -25,4 +36,24 @@
 
 .boxInputTask {
     margin-top: 10px;
+}
+
+.displayElementInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.flexDirectionFieldAndBtnRemove {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.elementsMainArrayField {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

@@ -6,6 +6,9 @@ import { Task } from "../../../../Interfaces/Task";
 import { useConfigContext } from "../../../../Context/taskContext";
 import UpdateTask from "./";
 
+interface Description {
+  description: string;
+}
 const UpdateTaskContainer: React.FC = () => {
   const { id }: { id: string } = useParams();
   const history = useHistory();
@@ -13,13 +16,20 @@ const UpdateTaskContainer: React.FC = () => {
 
   const taskEditedCurrent = task.find((itens) => itens.id === Number(id));
 
-  function updateTaskResponse(name: string, finish: number) {
+  function updateTaskResponse(
+    name: string,
+    finish: number,
+    waytask: Description[]
+  ) {
     if (name === "") {
       return false;
     }
+    console.log(waytask);
+    console.log(taskEditedCurrent.waytask)
     let objUp: Task = {
       id: Number(id),
       name,
+      waytask,
       finish: finish === 1 ? true : false,
       dtCreate: new Date(),
     };
@@ -34,7 +44,8 @@ const UpdateTaskContainer: React.FC = () => {
   return (
     <UpdateTask
       name={taskEditedCurrent ? taskEditedCurrent.name : ""}
-      finish={taskEditedCurrent ? (taskEditedCurrent.finish ? 1 : 0) : 0}
+      finish={taskEditedCurrent.finish ? 1 : 0}
+      waytask={taskEditedCurrent?.waytask && taskEditedCurrent?.waytask}
       updateTaskResponse={updateTaskResponse}
       validateForm={validateForm}
     />
