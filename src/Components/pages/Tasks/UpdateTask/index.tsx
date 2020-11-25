@@ -31,7 +31,7 @@ const UpdateTask: React.FC<TaskUpdateContainer> = ({
               <Field
                 value={values.name}
                 name="name"
-                placeholder={"Nova tarefa..."}
+                placeholder="Nova tarefa..."
                 className="inputStyleNameTask"
               />
               {errors.name}

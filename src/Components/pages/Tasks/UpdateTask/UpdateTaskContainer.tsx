@@ -28,7 +28,7 @@ const UpdateTaskContainer: React.FC = () => {
   }
 
   const validateForm = Yup.object().shape({
-    name: Yup.string().required("Por favor, preencha o nome"),
+    name: Yup.string().required("Por favor, preencha a tarefa"),
   });
 
   return (
