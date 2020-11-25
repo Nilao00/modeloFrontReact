@@ -12,56 +12,31 @@ const NewTask: React.FC<ContainerTask> = ({
   validateForm,
 }) => {
   return (
-    <div className="boxInputTask">
-      <Formik
-        initialValues={{ name: "" }}
-        validate={(values) => {
-          const errors = { name: "" };
-          if (!values.name || values.name === "") {
-            errors.name = "Por favor preencha o nome";
-          }
-          return errors;
-        }}
-        validationSchema={validateForm}
-        onSubmit={(values, { setSubmitting }) => {
-          checkFieldNameTask(values.name);
-          setSubmitting(false);
-        }}
-      >
-        {({ values, setValues, errors, handleBlur, isSubmitting }) => (
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              checkFieldNameTask(values.name);
-            }}
-          >
-            <div>
-              <h3 className="styleTitleTasks">Criar tarefa</h3>
-              <div className="mainNewTaskStyle">
-                <Field
-                  type="text"
-                  placeholder={"Nova tarefa..."}
-                  className="inputStyleNameTask"
-                  onChange={(val) => setValues({ name: val.target.value })}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  name="name"
-                  autoFocus
-                />
-                {errors.name}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="btnNewTaskPlus"
-                >
-                  Nova Tarefa
-                </button>
-              </div>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
+    <Formik
+      initialValues={{ name: "" }}
+      validationSchema={validateForm}
+      onSubmit={(values) => {
+        checkFieldNameTask(values.name);
+      }}
+    >
+      {({ errors }) => (
+        <Form className="boxInputTask">
+          <h3 className="styleTitleTasks">Criar tarefa</h3>
+          <div className="mainNewTaskStyle">
+            <Field
+              placeholder="Nova tarefa..."
+              className="inputStyleNameTask"
+              name="name"
+              autoFocus
+            />
+            {errors.name}
+            <button type="submit" className="btnNewTaskPlus">
+              Nova Tarefa
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

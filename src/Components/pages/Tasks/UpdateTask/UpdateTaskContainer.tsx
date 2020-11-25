@@ -16,16 +16,15 @@ const UpdateTaskContainer: React.FC = () => {
   function updateTaskResponse(name: string, finish: number) {
     if (name === "") {
       return false;
-    } else {
-      let objUp: Task = {
-        id: Number(id),
-        name,
-        finish: finish === 1 ? true : false,
-        dtCreate: new Date(),
-      };
-      updateTask(Number(id), objUp);
-      history.push("/");
     }
+    let objUp: Task = {
+      id: Number(id),
+      name,
+      finish: finish === 1 ? true : false,
+      dtCreate: new Date(),
+    };
+    updateTask(Number(id), objUp);
+    history.push("/");
   }
 
   const validateForm = Yup.object().shape({

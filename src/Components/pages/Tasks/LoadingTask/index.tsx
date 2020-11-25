@@ -1,8 +1,8 @@
 import React from "react";
 
-import moment from "moment";
 import { useHistory } from "react-router-dom";
 
+import formatDate from '../../../../utils';
 import { useConfigContext } from "../../../../Context/taskContext";
 
 import "../style.css";
@@ -35,7 +35,7 @@ const Tasks: React.FC = () => {
                       " - " +
                       (itens.finish ? "Atividade feita" : "Não feita")}
                   </span>
-                  <span>{moment(itens.dtCreate).format("DD/MM/YYYY")}</span>
+                  <span>{formatDate(itens.dtCreate)}</span>
                   <button
                     onClick={() => getItenForUpdate(itens.id)}
                     className="btnNewTaskEdit"
