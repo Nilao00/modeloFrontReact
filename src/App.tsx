@@ -1,15 +1,17 @@
 import React from "react";
 
 import Routes from "./routes";
-import { ConfigContextProvider } from "./Context/taskContext";
-
+import { ConfigContextProviderTask } from "./Context/taskContext";
+import { ConfigContextProviderLogin } from "./Context/loginContext";
 import "./styles/global.css";
 
 const App: React.FC = () => {
   return (
-    <ConfigContextProvider>
-      <Routes />
-    </ConfigContextProvider>
+    <ConfigContextProviderTask>
+      <ConfigContextProviderLogin>
+        <Routes />
+      </ConfigContextProviderLogin>
+    </ConfigContextProviderTask>
   );
 };
 

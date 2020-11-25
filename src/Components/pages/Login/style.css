@@ -1,0 +1,39 @@
+.styleMainLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.inputStyleLoginInput {
+    padding: 10px;
+    border-radius: 4px;
+    border: 0;
+}
+
+.inputStylePasswordInput {
+    padding: 10px;
+    border-radius: 4px;
+    border: 0;
+}
+
+.stylePositionBoxLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.btnLoginStyle {
+    color: white;
+    background: green;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 0;
+}

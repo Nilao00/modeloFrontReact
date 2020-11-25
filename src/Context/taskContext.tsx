@@ -1,7 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 
 import { Task } from "../Interfaces/Task";
-import { element } from "prop-types";
 
 export interface PropsMethods {
   task: Task[];
@@ -10,9 +9,9 @@ export interface PropsMethods {
   deleteTask(id: number): void;
 }
 
-const ConfigContext = createContext<PropsMethods>({} as PropsMethods);
+const ConfigContextTaks = createContext<PropsMethods>({} as PropsMethods);
 
-export const ConfigContextProvider = ({ children }) => {
+export const ConfigContextProviderTask = ({ children }) => {
   const [task, setTask] = useState<Task[]>([]);
 
   const handleTaskCreate = (taskCreate: Task) => {
@@ -46,7 +45,7 @@ export const ConfigContextProvider = ({ children }) => {
   };
 
   return (
-    <ConfigContext.Provider
+    <ConfigContextTaks.Provider
       value={{
         task,
         createTask: handleTaskCreate,
@@ -55,10 +54,10 @@ export const ConfigContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </ConfigContext.Provider>
+    </ConfigContextTaks.Provider>
   );
 };
 export const useConfigContext = () => {
-  const context = useContext(ConfigContext);
+  const context = useContext(ConfigContextTaks);
   return context;
 };
