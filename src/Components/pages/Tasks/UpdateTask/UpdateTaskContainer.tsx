@@ -24,8 +24,6 @@ const UpdateTaskContainer: React.FC = () => {
     if (name === "") {
       return false;
     }
-    console.log(waytask);
-    console.log(taskEditedCurrent.waytask)
     let objUp: Task = {
       id: Number(id),
       name,
