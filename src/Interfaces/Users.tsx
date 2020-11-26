@@ -2,7 +2,7 @@ export interface Users {
   id: number;
   login: string;
   url: string;
-  avatar: string;
+  avatar_url: string;
 }
 
 export interface UserMethods {

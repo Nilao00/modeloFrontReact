@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Accordion, Card } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 import { Formik, Form, Field } from "formik";
 
 import {
   getOneUserService,
   searchUserService,
-  responseUsers,
+  handleTextChange,
+  userInfo,
 } from "./UsersContainer";
 
 import { Users } from "../../../../Interfaces/Users";
@@ -15,37 +17,56 @@ import { Users } from "../../../../Interfaces/Users";
 import "./style.css";
 
 const Users: React.FC = () => {
-  const [usersinfo, setUsers] = useState<Users[]>([]);
+  // const [usersinfo, setUsers] = useState<Users[]>(userInfo);
+  const history = useHistory();
+
+  function getUserInfoCurrent(username: string) {
+    history.push(`/gituserlists/${username}`);
+  }
 
   return (
     <div className="styleListUsers">
       <Formik
         initialValues={{ searchUser: "" }}
         onSubmit={(values) => {
-          searchUserService(values.searchUser);
+          handleTextChange(values.searchUser);
         }}
       >
         <Form className="styleInfoFormsView">
           <label>Pesquise um usuário</label>
-          <Field type="text" name="searchuser" className="styleSearchBarUser" />
+          <input
+            name="searchUser"
+            className="styleSearchBarUser"
+            onChange={(val) => {
+              handleTextChange(val.target.value);
+            }}
+          />
         </Form>
       </Formik>
-      <Accordion defaultActiveKey="0">
-        {usersinfo.length > 0
-          ? usersinfo.map((users, index) => {
-              <Card key={index}>
-                <Accordion.Toggle as={Card.Header} eventKey="0">
-                  {users.login}
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <img src={users.avatar} className="styleInfoAvatarUser" />
-                      <span>{users.url}</span>
-                    </div>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>;
+      <Accordion defaultActiveKey="0" style={{ marginTop: 10 }}>
+        {userInfo?.length > 0
+          ? userInfo?.map((users, index) => {
+              return (
+                <Card key={index}>
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    eventKey={index.toString()}
+                  >
+                    {users.login}
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey={index.toString()}>
+                    <Card.Body onClick={() => getUserInfoCurrent(users.login)}>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <img
+                          src={users.avatar_url}
+                          className="styleInfoAvatarUser"
+                        />
+                        <span style={{ marginLeft: 5 }}>{users.url}</span>
+                      </div>
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              );
             })
           : "Nenhum resultado encontrado"}
       </Accordion>

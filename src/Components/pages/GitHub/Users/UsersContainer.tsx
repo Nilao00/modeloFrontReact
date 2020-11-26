@@ -6,12 +6,16 @@ import {
   getOneUser,
   searchUser,
 } from "../../../../Services/Api/Endpoints/Users";
+import { Users } from "../../../../Interfaces//Users";
 
+let userInfo: Users[] = [];
 async function searchUserService(searchResponse: string) {
   await service
     .get(searchUser + searchResponse)
     .then((data) => {
-      return data.data.items;
+      userInfo.length = 0;
+      userInfo.push(...data.data.items);
+      return userInfo;
     })
     .catch((error: AxiosError) => {
       console.log(error.response.data);
@@ -31,4 +35,11 @@ function* getOneUserService(id: number) {
 
 const responseUsers = AwesomeDebouncePromise(searchUserService, 900);
 
-export { getOneUserService, searchUserService, responseUsers };
+async function handleTextChange(text) {
+  if (text != "") {
+    await responseUsers(text);
+  }
+}
+
+
+export { getOneUserService, searchUserService, handleTextChange, userInfo };

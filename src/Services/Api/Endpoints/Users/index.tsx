@@ -1,4 +1,4 @@
 const searchUser: string = "/search/users?q=";
-const getOneUser: string = "";
+const getOneUser: string = "/users/";
 
 export { searchUser, getOneUser };
