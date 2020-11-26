@@ -8,7 +8,8 @@ const PrivateRoute: React.FC<{
   exact: boolean;
 }> = (props) => {
   const { token } = useConfigContext();
-
+   console.log(props)
+   console.log(token)
   return token !== '' ? (
     <Route path={props.path} exact={props.exact} component={props.component} />
   ) : (

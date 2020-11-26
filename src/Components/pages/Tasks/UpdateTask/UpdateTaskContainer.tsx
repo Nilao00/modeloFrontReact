@@ -32,7 +32,7 @@ const UpdateTaskContainer: React.FC = () => {
       dtCreate: new Date(),
     };
     updateTask(Number(id), objUp);
-    history.push("/");
+    history.push("/tasks");
   }
 
   const validateForm = Yup.object().shape({

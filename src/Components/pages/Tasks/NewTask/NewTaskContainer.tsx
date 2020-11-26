@@ -27,17 +27,14 @@ const NewTaskContainer: React.FC = () => {
       dtCreate: new Date(),
     };
     createTask(objCreateTask);
-    history.push("/");
+    history.push("/tasks");
   }
 
   const validateForm = Yup.object().shape({
     name: Yup.string().required("Por favor preencha o nome da tarefa"),
   });
 
-  function checkFieldNameTask(
-    name: string,
-    waytask: Description[]
-  ) {
+  function checkFieldNameTask(name: string, waytask: Description[]) {
     if (name === "" || !name) {
       return false;
     } else {
@@ -51,7 +48,7 @@ const NewTaskContainer: React.FC = () => {
     waytask: [
       {
         description: "",
-      }     
+      },
     ],
   };
 

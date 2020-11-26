@@ -6,9 +6,10 @@ import "./style.css";
 interface Props {
   submit(login: string, password: string): void;
   validateForm(): void;
+  history;
 }
 
-const Login: React.FC<Props> = ({ submit, validateForm }) => {
+const Login: React.FC<Props> = ({ submit, validateForm, history }) => {
   return (
     <Formik
       initialValues={{
@@ -18,6 +19,7 @@ const Login: React.FC<Props> = ({ submit, validateForm }) => {
       validationSchema={validateForm}
       onSubmit={(values) => {
         submit(values.login, values.password);
+        history.push("/tasks");
       }}
     >
       {({ errors }) => (
