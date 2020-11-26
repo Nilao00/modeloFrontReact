@@ -19,6 +19,14 @@ const Tasks: React.FC = () => {
     return history.push("/newTask");
   }
 
+  function searchUsersGit(){
+    return history.push('/gituserlists')
+  }
+
+  function searchRepositoryGit(){
+    return history.push('/gituserlists')
+  }
+
   return (
     <div className="mainStyleViewTask">
       <div className="listViewStyleTasks">
@@ -34,18 +42,9 @@ const Tasks: React.FC = () => {
                       " - " +
                       (itens.finish ? "Atividade feita" : "Não feita")}
                     {itens.waytask.length > 0 &&
-                      itens.waytask.map((value, i) => {
-                        return (
-                          <div key={i}>
-                            {i < 1 && (
-                              <p style={{ color: "red", fontFamily: '8px' }}>
-                                Descrições:
-                              </p>
-                            )}
-                            <div key={i}>{[value?.description].join(', ')}</div>
-                          </div>
-                        );
-                      })}
+                      itens.waytask
+                        .map((element) => element.description)
+                        .join(";")}
                   </span>
                   <span>{formatDate(itens.dtCreate)}</span>
                   <button
@@ -65,11 +64,16 @@ const Tasks: React.FC = () => {
             })
           : "Não foram encontrados itens"}
       </div>
-      <div>
         <button className="btnNewTask" onClick={createNewTask}>
           Nova tarefa
         </button>
-      </div>
+        <button className="btnNewTask" onClick={searchUsersGit}>
+          Buscar usuarios Github
+        </button>
+        <button className="btnNewTask" onClick={searchRepositoryGit}>
+          Buscar repositório Github
+        </button>
+    
     </div>
   );
 };

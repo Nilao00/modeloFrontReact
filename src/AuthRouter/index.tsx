@@ -2,18 +2,18 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useConfigContext } from "../Context/loginContext";
 
-const PrivateRoute: React.FC<{
-  component: React.FC;
+interface Props {
   path: string;
   exact: boolean;
-}> = (props) => {
+  component: React.FC;
+}
+const PrivateRoute: React.FC<Props> = (props) => {
   const { token } = useConfigContext();
-   console.log(props)
-   console.log(token)
-  return token !== '' ? (
+
+  if (!token) return <Redirect to="/" />;
+
+  return (
     <Route path={props.path} exact={props.exact} component={props.component} />
-  ) : (
-    <Redirect to="/" />
   );
 };
 export default PrivateRoute;

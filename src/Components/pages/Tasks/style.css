@@ -92,7 +92,6 @@
     border-radius: 8px;
 }
 
-
 .inputStyleNameTask {
     padding: 10px;
     border-radius: 8px;
@@ -103,4 +102,11 @@
 .styleTitleTasks {
     text-align: center;
     margin-bottom: 10px;
+}
+
+.styleDisplayButtonsActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
