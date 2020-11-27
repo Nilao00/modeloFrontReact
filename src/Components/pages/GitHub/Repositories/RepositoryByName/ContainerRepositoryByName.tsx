@@ -14,7 +14,6 @@ const ContainerRepositoryByName: React.FC = () => {
       .get(getOneRepository + id)
       .then((data) => {
         setRepository(data.data);
-        console.log(data.data)
         return data.data;
       })
       .catch((error: AxiosError) => {

@@ -22,8 +22,8 @@ const RepositoryById: React.FC<Props> = ({
     <Card style={{ margin: 10 }}>
       <Card.Header>{repository?.name}</Card.Header>
       <Card.Body>
-        {repository?.url} -{" "}
-        {"Privado? " + repository?.private ? "Sim" : "Não"}
+        <span>{repository?.url + '. Privado? '}</span>
+        <span>{repository?.private ? "Sim" : "Não"}</span>
       </Card.Body>
     </Card>
   );
