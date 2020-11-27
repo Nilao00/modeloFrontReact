@@ -26,14 +26,14 @@ const Repositories: React.FC<Props> = ({ repositories, handleTextChange }) => {
           handleTextChange(values.searchRepository);
         }}
       >
-        {({ errors }) => (
-          <Form>
-            <Field
-              name="searchRepository"
-              onKeyUp={(val) => handleTextChange(val.target.value)}
-            />
-          </Form>
-        )}
+        <Form>
+          <label>Pesquise um repositório</label>
+          <Field
+            name="searchRepository"
+            className="form-control"
+            onKeyUp={(val) => handleTextChange(val.target.value)}
+          />
+        </Form>
       </Formik>
       <Accordion defaultActiveKey="0" style={{ marginTop: 10 }}>
         {repositories?.length > 0
@@ -47,7 +47,9 @@ const Repositories: React.FC<Props> = ({ repositories, handleTextChange }) => {
                     {repo.name}
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey={index.toString()}>
-                    <Card.Body onClick={() => getUserInfoCurrent(repo.id.toString())}>
+                    <Card.Body
+                      onClick={() => getUserInfoCurrent(repo.id.toString())}
+                    >
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <img
                           src={repo.owner.avatar_url}

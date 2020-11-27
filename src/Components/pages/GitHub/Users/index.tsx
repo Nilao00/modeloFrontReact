@@ -3,7 +3,7 @@ import React from "react";
 import { Accordion, Card, Carousel } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 
 import { Users } from "../../../../Interfaces/Users";
 
@@ -31,10 +31,10 @@ const Users: React.FC<Props> = ({ handleTextChange, users }) => {
       >
         <Form className="styleInfoFormsView">
           <label>Pesquise um usuário</label>
-          <input
+          <Field
             name="searchUser"
-            className="styleSearchBarUser"
-            onChange={(val) => {
+            className="form-control"
+            onKeyUp={(val) => {
               handleTextChange(val.target.value);
             }}
           />
