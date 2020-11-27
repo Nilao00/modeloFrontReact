@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import useSWR from "swr";
 
 const baseUrl = axios.create({
@@ -6,8 +6,8 @@ const baseUrl = axios.create({
 });
 
 export function useFetch<Data = any, Error = any>(url: string) {
-  const { data, error } = useSWR<Data, Error>(url, async (url) => {
-    const response = await baseUrl.get(url);
+  const { data, error } = useSWR<Data, Error>(url, async (url: string) => {
+    const response: AxiosResponse = await baseUrl.get(url);
 
     return response.data;
   });
