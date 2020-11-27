@@ -1,30 +1,21 @@
-import React, { useState } from "react";
-import { AxiosError } from "axios";
+import React from "react";
+import { useParams } from "react-router-dom";
 
-import service from "../../../../../Services/Api";
+import { useFetch } from "../../../../../Services/Api";
 import { getOneUser } from "../../../../../Services/Api/Endpoints/Users";
 import UsersById from ".";
 import { Users } from "../../../../../Interfaces/Users";
 
 const ContainerUserByUserName: React.FC = () => {
-  const [user, setUser] = useState<Users>();
+  const { username }: { username: string } = useParams();
 
-  async function getUserByIdService(username: string) {
-    await service
-      .get(getOneUser + username)
-      .then((data) => {
-        setUser(data.data)
-        return data.data;
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-      });
+  const { data } = useFetch<Users>(getOneUser + username);
+
+  if (!data) {
+    return <p style={{ textAlign: "center" }}>Carregando...</p>;
   }
 
-  return <UsersById 
-  user={user}
-  getUserByIdService={getUserByIdService} 
-  />;
+  return <UsersById user={data} />;
 };
 
 export default ContainerUserByUserName;

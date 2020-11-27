@@ -5,16 +5,16 @@ import { Users } from "../../../../../Interfaces/Users";
 
 interface Props {
   user: Users;
-  getUserByIdService(username: string): Promise<void>;
+//  getUserByIdService(username: string): Promise<void>;
 }
 
-const UsersById: React.FC<Props> = ({ getUserByIdService, user }) => {
-  const { username }: { username: string } = useParams();
+const UsersById: React.FC<Props> = ({  user }) => {
+  
 
-  useEffect(() => {
+ /*  useEffect(() => {
     getUserByIdService(username);
   }, []);
-
+ */
   return (
     <Card>
       <Card.Header>{user?.login}</Card.Header>

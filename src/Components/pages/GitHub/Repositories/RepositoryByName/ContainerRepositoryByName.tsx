@@ -1,32 +1,21 @@
-import React, { useState } from "react";
-import { AxiosError } from "axios";
+import React from "react";
+import { useParams } from "react-router-dom";
 
-import service from "../../../../../Services/Api";
+import { useFetch } from "../../../../../Services/Api";
 import { getOneRepository } from "../../../../../Services/Api/Endpoints/Repository";
 import RepositoryById from ".";
-import { Repository  } from "../../../../../Interfaces/Repository";
+import { Repository } from "../../../../../Interfaces/Repository";
 
 const ContainerRepositoryByName: React.FC = () => {
-  const [repository, setRepository] = useState<Repository>();
+  const { id }: { id: string } = useParams();
 
-  async function getRepositoryByIdService(id: string) {
-    await service
-      .get(getOneRepository + id)
-      .then((data) => {
-        setRepository(data.data);
-        return data.data;
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-      });
+  const { data } = useFetch<Repository>(getOneRepository + id);
+
+  if (!data) {
+    return <p style={{ textAlign: "center" }}>Carregando...</p>;
   }
 
-  return (
-    <RepositoryById
-      repository={repository}
-      getRepositoryByIdService={getRepositoryByIdService}
-    />
-  );
+  return <RepositoryById repository={data} />;
 };
 
 export default ContainerRepositoryByName;
