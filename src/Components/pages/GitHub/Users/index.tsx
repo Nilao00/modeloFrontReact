@@ -44,18 +44,20 @@ const Users: React.FC<Props> = ({ handleTextChange, users }) => {
         {users?.length > 0
           ? users?.map((users, index) => {
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  onClick={() => getUserInfoCurrent(users.login)}
+                >
                   <Card>
                     <Accordion.Toggle
                       as={Card.Header}
                       eventKey={index.toString()}
+                      onClick={(ev) => ev.stopPropagation()}
                     >
                       {users.id + " - " + users.login}
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={index.toString()}>
-                      <Card.Body
-                        onClick={() => getUserInfoCurrent(users.login)}
-                      >
+                      <Card.Body>
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <img
                             src={users.avatar_url}
