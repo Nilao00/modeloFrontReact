@@ -4,16 +4,17 @@ import { AxiosError } from "axios";
 import service from "../../../../../Services/Api";
 import { getOneRepository } from "../../../../../Services/Api/Endpoints/Repository";
 import RepositoryById from ".";
-import { Items  } from "../../../../../Interfaces/Repository";
+import { Repository  } from "../../../../../Interfaces/Repository";
 
 const ContainerRepositoryByName: React.FC = () => {
-  const [repository, setRepository] = useState<Items[]>([]);
+  const [repository, setRepository] = useState<Repository>();
 
-  async function getRepositoryByIdService(username: string) {
+  async function getRepositoryByIdService(id: string) {
     await service
-      .get(getOneRepository + username + '/repos')
+      .get(getOneRepository + id)
       .then((data) => {
         setRepository(data.data);
+        console.log(data.data)
         return data.data;
       })
       .catch((error: AxiosError) => {

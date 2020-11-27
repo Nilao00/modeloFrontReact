@@ -47,7 +47,7 @@ const Repositories: React.FC<Props> = ({ repositories, handleTextChange }) => {
                     {repo.name}
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey={index.toString()}>
-                    <Card.Body onClick={() => getUserInfoCurrent(repo.owner.login)}>
+                    <Card.Body onClick={() => getUserInfoCurrent(repo.id.toString())}>
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <img
                           src={repo.owner.avatar_url}

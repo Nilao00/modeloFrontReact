@@ -16,6 +16,11 @@ export interface Items {
 export interface Repository {
   items: Items[];
   total_count: number;
+  id: number;
+  name: string;
+  fullname: string;
+  url: string;
+  private: boolean;
 }
 
 export interface RepositoryMethods {

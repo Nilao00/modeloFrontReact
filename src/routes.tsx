@@ -33,7 +33,7 @@ const Routers: React.FC = () => {
           exact
         />
         <AuthRouter
-          path="/gitrepositorieslists/:username"
+          path="/gitrepositorieslists/:id"
           component={RepositoryByName}
           exact
         />
