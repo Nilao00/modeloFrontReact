@@ -3,6 +3,8 @@ export interface Users {
   login: string;
   url: string;
   avatar_url: string;
+  html_url: string;
+  type: string;
 }
 
 export interface UserMethods {
