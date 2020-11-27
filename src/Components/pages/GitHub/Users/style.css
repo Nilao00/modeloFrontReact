@@ -20,3 +20,12 @@
     display: flex;
     flex-direction: column;
 }
+
+.styleSizeCarousel {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.styleSizeCard {
+    max-width: 300px;
+}

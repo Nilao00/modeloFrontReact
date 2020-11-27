@@ -48,7 +48,7 @@ const Users: React.FC<Props> = ({ handleTextChange, users }) => {
                   key={index}
                   onClick={() => getUserInfoCurrent(users.login)}
                 >
-                  <Card>
+                  <Card className="styleSizeCard">
                     <Accordion.Toggle
                       as={Card.Header}
                       eventKey={index.toString()}
@@ -63,12 +63,14 @@ const Users: React.FC<Props> = ({ handleTextChange, users }) => {
                             src={users.avatar_url}
                             className="styleInfoAvatarUser"
                           />
-                          <span style={{ marginLeft: 5 }}>{users.url}</span>
+                          <span style={{ marginLeft: 5, maxWidth: 200 }}>
+                            {users.url}
+                          </span>
                         </div>
                       </Card.Body>
                     </Accordion.Collapse>
                   </Card>
-                  <Carousel controls={false}>
+                  <Carousel controls={false} className="styleSizeCarousel">
                     <Carousel.Item>
                       <img
                         className="d-block w-100"
@@ -76,7 +78,14 @@ const Users: React.FC<Props> = ({ handleTextChange, users }) => {
                         alt="First slide"
                       />
                       <Carousel.Caption>
-                        <h3 style={{ paddingRight: 10 }}>{users.html_url}</h3>
+                        <h3
+                          style={{
+                            paddingRight: 10,
+                            wordBreak: "break-word",
+                          }}
+                        >
+                          {users.html_url}
+                        </h3>
                         <p>{users.type}</p>
                       </Carousel.Caption>
                     </Carousel.Item>
