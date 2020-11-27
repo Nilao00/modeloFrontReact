@@ -18,7 +18,7 @@ const UsersById: React.FC<Props> = ({ getUserByIdService, user }) => {
   return (
     <Card>
       <Card.Header>{user?.login}</Card.Header>
-      <Card.Body>{user?.url}</Card.Body>
+      <Card.Body>{user?.html_url}</Card.Body>
     </Card>
   );
 };
