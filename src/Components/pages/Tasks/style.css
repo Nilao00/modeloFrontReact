@@ -21,7 +21,7 @@
 }
 
 .btnNewTask {
-    position: absolute;
+    position: relative;
     bottom: 0;
     right: 0;
     margin-right: 15px;
@@ -109,4 +109,14 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+.styleFooterButton {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 12px;
+    padding: 10px;
 }

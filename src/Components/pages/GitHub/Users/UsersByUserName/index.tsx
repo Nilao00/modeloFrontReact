@@ -13,13 +13,12 @@ const UsersById: React.FC<Props> = ({ getUserByIdService, user }) => {
 
   useEffect(() => {
     getUserByIdService(username);
-    console.log(user)
   }, []);
 
   return (
     <Card>
-  {/*     <Card.Header>{user.login}</Card.Header>
-      <Card.Body>{user.url}</Card.Body> */}
+      <Card.Header>{user?.login}</Card.Header>
+      <Card.Body>{user?.url}</Card.Body>
     </Card>
   );
 };

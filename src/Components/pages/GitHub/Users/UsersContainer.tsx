@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AxiosError } from "axios";
 import AwesomeDebouncePromise from "awesome-debounce-promise";
 
-import service from "../../../../Services/Api";
+import service from "../../../../Services/Api/";
 import { searchUser } from "../../../../Services/Api/Endpoints/Users";
 import UserView from "./";
 import { Users } from "../../../../Interfaces/Users";

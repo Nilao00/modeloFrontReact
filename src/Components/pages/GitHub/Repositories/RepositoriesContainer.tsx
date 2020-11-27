@@ -1,56 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { AxiosError } from "axios";
-
-import { RepositoryMethods } from "../../../../Interfaces/Repository";
 
 import service from "../../../../Services/Api";
 
 import {
-  getOneRepository,
   searchRepository,
 } from "../../../../Services/Api/Endpoints/Repository";
 
 import AwesomeDebouncePromise from "awesome-debounce-promise";
 
-import Repository from "./";
+import RepositoryView from "./";
+import { Items } from "../../../../Interfaces/Repository";
 
-const RepositoriesContainer: React.FC<RepositoryMethods> = ({
-  repositories,
-}) => {
+const RepositoriesContainer: React.FC = () => {
+  const [repositories, setRepositories] = useState<Items[]>([]);
+
   async function searchRepositoryService(searchResponse: string) {
     await service
       .get(searchRepository + searchResponse)
       .then((data) => {
-        console.log(data);
-        return data;
+        setRepositories(data.data.items);
+        return data.data.items;
       })
       .catch((error: AxiosError) => {
         console.log(error.response.data);
       });
   }
 
-  async function getOneRepositoryService(id: number) {
-    await service
-      .get(getOneRepository + id)
-      .then((data) => {
-        console.log(data);
-        return data;
-      })
-      .catch((error: AxiosError) => {
-        console.log(error.response.data);
-      });
-  }
+  const responseUsers = AwesomeDebouncePromise(searchRepositoryService, 900);
 
-  const searchDebounce = () => {
-    return AwesomeDebouncePromise(searchRepositoryService, 900);
-  };
+  async function handleTextChange(textSearch: string) {
+    if (textSearch != "") {
+      await responseUsers(textSearch);
+    }
+  }
 
   return (
-    <Repository
+    <RepositoryView
       repositories={repositories}
-      searchRepositoryService={searchRepositoryService}
-      getOneRepositoryService={getOneRepositoryService}
-      searchDebounce={searchDebounce}
+      handleTextChange={handleTextChange}
     />
   );
 };

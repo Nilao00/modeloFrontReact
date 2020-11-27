@@ -3,10 +3,10 @@ import { AxiosError } from "axios";
 
 import service from "../../../../../Services/Api";
 import { getOneUser } from "../../../../../Services/Api/Endpoints/Users";
-import UsersById from "./";
+import UsersById from ".";
 import { Users } from "../../../../../Interfaces/Users";
 
-const ContainerUserById: React.FC = () => {
+const ContainerUserByUserName: React.FC = () => {
   const [user, setUser] = useState<Users>();
 
   async function getUserByIdService(username: string) {
@@ -28,4 +28,4 @@ const ContainerUserById: React.FC = () => {
   />;
 };
 
-export default ContainerUserById;
+export default ContainerUserByUserName;

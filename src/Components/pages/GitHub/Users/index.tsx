@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { Accordion, Card } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 
 import { Users } from "../../../../Interfaces/Users";
 

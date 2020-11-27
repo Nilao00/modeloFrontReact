@@ -19,12 +19,12 @@ const Tasks: React.FC = () => {
     return history.push("/newTask");
   }
 
-  function searchUsersGit(){
-    return history.push('/gituserlists')
+  function searchUsersGit() {
+    return history.push("/gituserlists");
   }
 
-  function searchRepositoryGit(){
-    return history.push('/gituserlists')
+  function searchRepositoryGit() {
+    return history.push("/gitrepositorieslists");
   }
 
   return (
@@ -64,16 +64,23 @@ const Tasks: React.FC = () => {
             })
           : "Não foram encontrados itens"}
       </div>
-        <button className="btnNewTask" onClick={createNewTask}>
-          Nova tarefa
-        </button>
-        <button className="btnNewTask" onClick={searchUsersGit}>
-          Buscar usuarios Github
-        </button>
-        <button className="btnNewTask" onClick={searchRepositoryGit}>
-          Buscar repositório Github
-        </button>
-    
+      <div className="styleFooterButton">
+        <span>
+          <button className="btnNewTask" onClick={createNewTask}>
+            Nova tarefa
+          </button>
+        </span>
+        <span>
+          <button className="btnNewTask" onClick={searchUsersGit}>
+            Buscar usuarios Github
+          </button>
+        </span>
+        <span>
+          <button className="btnNewTask" onClick={searchRepositoryGit}>
+            Buscar repositório Github
+          </button>
+        </span>
+      </div>
     </div>
   );
 };

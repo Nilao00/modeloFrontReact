@@ -1,5 +1,6 @@
-import Users from "./Users/";
-import UsersById from './Users/UsersById'
-import Repositories from "./Repositories";
+import Users from "./Users/UsersContainer";
+import UsersByUserName from "./Users/UsersByUserName/ContainerUsersByUserName";
+import RepositoryByName from "./Repositories/RepositoryByName/ContainerRepositoryByName";
+import Repositories from "./Repositories/RepositoriesContainer";
 
-export { Users, Repositories,UsersById };
+export { Users, Repositories, UsersByUserName, RepositoryByName };
