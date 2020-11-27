@@ -5,26 +5,23 @@ import { useHistory } from "react-router-dom";
 
 import { Formik, Form, Field } from "formik";
 
-import {
-  getOneUserService,
-  searchUserService,
-  handleTextChange,
-  userInfo,
-} from "./UsersContainer";
-
 import { Users } from "../../../../Interfaces/Users";
 
 import "./style.css";
 
-const Users: React.FC = () => {
-  // const [usersinfo, setUsers] = useState<Users[]>(userInfo);
+interface Props {
+  handleTextChange(textSearch: string): Promise<void>;
+  users: Users[];
+}
+
+const Users: React.FC<Props> = ({ handleTextChange, users}) => {
   const history = useHistory();
 
   function getUserInfoCurrent(username: string) {
     history.push(`/gituserlists/${username}`);
   }
 
-  return (
+ return (
     <div className="styleListUsers">
       <Formik
         initialValues={{ searchUser: "" }}
@@ -44,8 +41,8 @@ const Users: React.FC = () => {
         </Form>
       </Formik>
       <Accordion defaultActiveKey="0" style={{ marginTop: 10 }}>
-        {userInfo?.length > 0
-          ? userInfo?.map((users, index) => {
+        {users?.length > 0
+          ? users?.map((users, index) => {
               return (
                 <Card key={index}>
                   <Accordion.Toggle

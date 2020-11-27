@@ -1,45 +1,36 @@
+import React, { useState } from "react";
 import { AxiosError } from "axios";
 import AwesomeDebouncePromise from "awesome-debounce-promise";
 
 import service from "../../../../Services/Api";
-import {
-  getOneUser,
-  searchUser,
-} from "../../../../Services/Api/Endpoints/Users";
-import { Users } from "../../../../Interfaces//Users";
+import { searchUser } from "../../../../Services/Api/Endpoints/Users";
+import UserView from "./";
+import { Users } from "../../../../Interfaces/Users";
 
-let userInfo: Users[] = [];
-async function searchUserService(searchResponse: string) {
-  await service
-    .get(searchUser + searchResponse)
-    .then((data) => {
-      userInfo.length = 0;
-      userInfo.push(...data.data.items);
-      return userInfo;
-    })
-    .catch((error: AxiosError) => {
-      console.log(error.response.data);
-    });
-}
+const UsersContainer: React.FC = () => {
+  const [users, setUsers] = useState<Users[]>([]);
 
-function* getOneUserService(id: number) {
-  yield service
-    .get(getOneUser + id)
-    .then((data) => {
-      return data.data.items;
-    })
-    .catch((error: AxiosError) => {
-      console.log(error.response.data);
-    });
-}
-
-const responseUsers = AwesomeDebouncePromise(searchUserService, 900);
-
-async function handleTextChange(text) {
-  if (text != "") {
-    await responseUsers(text);
+  async function searchUserService(searchResponse: string) {
+    await service
+      .get(searchUser + searchResponse)
+      .then((data) => {
+        setUsers(data.data.items);
+        return data.data.items;
+      })
+      .catch((error: AxiosError) => {
+        console.log(error.response.data);
+      });
   }
-}
 
+  const responseUsers = AwesomeDebouncePromise(searchUserService, 900);
 
-export { getOneUserService, searchUserService, handleTextChange, userInfo };
+  async function handleTextChange(textSearch: string) {
+    if (textSearch != "") {
+      await responseUsers(textSearch);
+    }
+  }
+
+  return <UserView handleTextChange={handleTextChange} users={users}  />;
+};
+
+export default UsersContainer;

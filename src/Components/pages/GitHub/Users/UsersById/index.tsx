@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Card } from "react-bootstrap";
+import { Users } from "../../../../../Interfaces/Users";
 
-import { getUserByIdService, userCurrent } from "./ContainerUsersById";
+interface Props {
+  user: Users;
+  getUserByIdService(username: string): Promise<void>;
+}
 
-const UsersById: React.FC = () => {
+const UsersById: React.FC<Props> = ({ getUserByIdService, user }) => {
   const { username }: { username: string } = useParams();
 
   useEffect(() => {
     getUserByIdService(username);
-  }, [userCurrent]);
+    console.log(user)
+  }, []);
 
   return (
     <Card>
-      <Card.Header>{userCurrent?.login}</Card.Header>
-      <Card.Body>{userCurrent?.url}</Card.Body>
+  {/*     <Card.Header>{user.login}</Card.Header>
+      <Card.Body>{user.url}</Card.Body> */}
     </Card>
   );
 };
