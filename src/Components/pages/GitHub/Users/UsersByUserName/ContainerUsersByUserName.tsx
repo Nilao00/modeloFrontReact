@@ -14,7 +14,6 @@ const ContainerUserByUserName: React.FC = () => {
       .get(getOneUser + username)
       .then((data) => {
         setUser(data.data)
-        console.log(data.data)
         return data.data;
       })
       .catch((error: AxiosError) => {
