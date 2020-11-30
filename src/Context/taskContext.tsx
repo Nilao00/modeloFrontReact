@@ -20,7 +20,6 @@ export const ConfigContextProviderTask = ({ children }) => {
 
   const handleTaskCreate = (taskCreate: Task) => {
     setTask([...task, taskCreate]);
-    task.slice(0, limit);
     return task;
   };
 
@@ -34,7 +33,6 @@ export const ConfigContextProviderTask = ({ children }) => {
       }
       return elements;
     });
-    response.slice(0, limit);
     setTask(response);
   };
 
@@ -47,7 +45,6 @@ export const ConfigContextProviderTask = ({ children }) => {
         }
         return true;
       });
-      response.slice(0, limit);
       return setTask(response);
     }
   };

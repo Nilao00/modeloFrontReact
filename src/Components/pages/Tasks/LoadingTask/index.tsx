@@ -11,11 +11,18 @@ import "../style.css";
 
 interface Props {
   chargeMoreListTask(e: any): Task[];
+  setIndexPaginateButton(): Task[];
+  paginate(pageNumber: number): number;
+  tasks:Task[]
 }
 
-const Tasks: React.FC<Props> = ({ chargeMoreListTask }) => {
+const Tasks: React.FC<Props> = ({
+  chargeMoreListTask,
+  setIndexPaginateButton,
+  paginate,
+  tasks
+}) => {
   const { deleteTask, task, limit } = useConfigContext();
-  console.log(task.slice(0, limit));
   const history = useHistory();
 
   function getItenForUpdate(id: number) {
@@ -38,8 +45,8 @@ const Tasks: React.FC<Props> = ({ chargeMoreListTask }) => {
     <div className="mainStyleViewTask">
       <div className="listViewStyleTasks" onScroll={chargeMoreListTask}>
         <h3 className="styleTitleTasks">Listagem de tarefas</h3>
-        {task.slice(0, limit).length > 0
-          ? task.slice(0, limit).map((itens, index) => {
+        {tasks.slice(0, limit).length > 0
+          ? tasks.slice(0, limit).map((itens, index) => {
               return (
                 <>
                   <div className="cardStyleTask" key={index}>
@@ -72,7 +79,20 @@ const Tasks: React.FC<Props> = ({ chargeMoreListTask }) => {
               );
             })
           : "Não foram encontrados itens"}
+       
       </div>
+      <nav>
+          <ul className="pagination">
+            {console.log(task)}
+            {setIndexPaginateButton().map((number, index) => (
+              <li key={index} onClick={() => paginate(Number(number))}>
+                <a href="#" className="page-link">
+                  {number}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       <div className="styleFooterButton">
         <span>
           <button className="btnNewTask" onClick={createNewTask}>
