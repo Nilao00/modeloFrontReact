@@ -1,0 +1,9 @@
+.pagination{
+    min-height: 42px;
+    height: 42px;
+    max-height: 42px;
+}
+.page-item{
+    list-style-type: none !important;
+    margin-top: 20px;
+}

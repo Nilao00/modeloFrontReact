@@ -1,9 +1,12 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 
 import { Task } from "../Interfaces/Task";
 
 export interface PropsMethods {
   task: Task[];
+  limit: number;
+  setTask: React.Dispatch<React.SetStateAction<Task[]>>;
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
   createTask(taskCreate: Task): void;
   updateTask(id: number, taskUpdate: Task): void;
   deleteTask(id: number): void;
@@ -13,9 +16,12 @@ const ConfigContextTaks = createContext<PropsMethods>({} as PropsMethods);
 
 export const ConfigContextProviderTask = ({ children }) => {
   const [task, setTask] = useState<Task[]>([]);
+  const [limit, setLimit] = useState<number>(5);
 
   const handleTaskCreate = (taskCreate: Task) => {
     setTask([...task, taskCreate]);
+    task.slice(0, limit);
+    return task;
   };
 
   const handleTaskUpdate = (id: number, taskUpdate: Task) => {
@@ -28,6 +34,7 @@ export const ConfigContextProviderTask = ({ children }) => {
       }
       return elements;
     });
+    response.slice(0, limit);
     setTask(response);
   };
 
@@ -40,6 +47,7 @@ export const ConfigContextProviderTask = ({ children }) => {
         }
         return true;
       });
+      response.slice(0, limit);
       return setTask(response);
     }
   };
@@ -48,6 +56,9 @@ export const ConfigContextProviderTask = ({ children }) => {
     <ConfigContextTaks.Provider
       value={{
         task,
+        setTask,
+        limit,
+        setLimit,
         createTask: handleTaskCreate,
         updateTask: handleTaskUpdate,
         deleteTask: handleTaskDelete,
