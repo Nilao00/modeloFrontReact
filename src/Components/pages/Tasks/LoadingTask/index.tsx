@@ -1,35 +1,21 @@
-import React, { useEffect, useState, UIEvent } from "react";
-import { Pagination } from "react-bootstrap";
+import React from "react";
 
 import { useHistory } from "react-router-dom";
 
 import formatDate from "../../../../utils";
 import { useConfigContext } from "../../../../Context/taskContext";
-
 import { Task } from "../../../../Interfaces/Task";
-import "../style.css";
-import { number } from "prop-types";
+import Paginate from "./paginate";
 
+import "../style.css";
 interface Props {
-  chargeMoreListTask(e: any): Task[];
-  setIndexPaginateButton(): Task[];
-  paginate(pageNumber: number): Task[];
-  nextPage(): Task[];
-  prevPage(): Task[];
-  pageNumbers: number[];
-  // tasks: Task[];
+  paginate(pageNumber: number): void;
+  currentPosts: Task[];
 }
 
-const Tasks: React.FC<Props> = ({
-  chargeMoreListTask,
-  setIndexPaginateButton,
-  paginate,
-  prevPage,
-  nextPage,
-  pageNumbers,
-  // tasks,
-}) => {
-  const { deleteTask, task, limit, tasksListPaginate } = useConfigContext();
+const Tasks: React.FC<Props> = ({ paginate, currentPosts }) => {
+  const { deleteTask, task } = useConfigContext();
+
   const history = useHistory();
 
   function getItenForUpdate(id: number) {
@@ -52,8 +38,8 @@ const Tasks: React.FC<Props> = ({
     <div className="mainStyleViewTask">
       <div className="listViewStyleTasks">
         <h3 className="styleTitleTasks">Listagem de tarefas</h3>
-        {task.slice(0, limit).length > 0
-          ? task.slice(0, limit).map((itens, index) => {
+        {currentPosts.length > 0
+          ? currentPosts.map((itens, index) => {
               return (
                 <>
                   <div className="cardStyleTask" key={index}>
@@ -87,25 +73,7 @@ const Tasks: React.FC<Props> = ({
             })
           : "Não foram encontrados itens"}
       </div>
-      <nav>
-        <ul className="pagination">
-          <li onClick={prevPage} className="elementBtnPaginate">
-            <a className="page-link">Anterior</a>
-          </li>
-          {pageNumbers.map((number, index) => (
-            <li
-              key={index}
-              onClick={() => paginate(Number(number))}
-              className="elementBtnPaginate"
-            >
-              <a className="page-link">{number}</a>
-            </li>
-          ))}
-          <li onClick={nextPage} className="elementBtnPaginate">
-            <a className="page-link">Próximo</a>
-          </li>
-        </ul>
-      </nav>
+      <Paginate postsPerPage={5} totalPosts={task.length} paginate={paginate} />
       <div className="styleFooterButton">
         <span>
           <button className="btnNewTask" onClick={createNewTask}>
