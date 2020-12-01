@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pages } from "./style";
 import "./style.css";
 
@@ -20,16 +20,30 @@ const Paginate: React.FC<Props> = ({
   prevPage,
 }) => {
   const pagenumbers: number[] = [];
+  const maxVisibleButtons = 5;
   const totalPages = totalPosts / postsPerPage;
 
-  for (let i = 1; i <= Math.ceil(totalPages); i++) {
-    if (i <= 5) {
-      pagenumbers.push(i);
-    }
+  let maxLeft = currentPage - Math.floor(maxVisibleButtons / 2);
+  let maxRight = currentPage + Math.floor(maxVisibleButtons / 2);
+
+  if (maxLeft < 1) {
+    maxLeft = 1;
+    maxRight = maxVisibleButtons;
+  }
+
+  if (maxRight > totalPages) {
+    maxLeft = totalPages - (maxVisibleButtons - 1);
+    maxRight = totalPages;
+
+    if (maxLeft < 1) maxLeft = 1;
+  }
+
+  for (let page = maxLeft; page <= maxRight; page++) {
+    pagenumbers.push(Math.ceil(page));
   }
 
   return (
-    <div className="styleFooterButton">
+    <div>
       <nav>
         <Pages
           style={{
@@ -49,15 +63,21 @@ const Paginate: React.FC<Props> = ({
                 key={item}
                 className="page-item"
               >
-                <button className="table-button">{item}</button>
+                <button
+                  className="table-button"
+                  style={{ background: currentPage === item && "red" }}
+                >
+                  {item}
+                </button>
               </th>
             );
           })}
-          {pagenumbers[pagenumbers.length - 1] !== currentPage && (
-            <button className="buttonNext" onClick={nextPage}>
-              Próximo
-            </button>
-          )}
+          {pagenumbers[pagenumbers.length - 1] !== currentPage &&
+            pagenumbers.length > 0 && (
+              <button className="buttonNext" onClick={nextPage}>
+                Próximo
+              </button>
+            )}
         </Pages>
       </nav>
     </div>

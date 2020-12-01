@@ -18,11 +18,19 @@ const ContainerLoadingTask: React.FC = () => {
   }
 
   function nextPage() {
+    const totalPages = Math.ceil(task.length / 5);
     setCurrentPage(currentPage + 1);
+    const lastPage = currentPage > totalPages;
+    if (lastPage) {
+      setCurrentPage(currentPage - 1);
+    }
   }
 
   function prevPage() {
     setCurrentPage(currentPage - 1);
+    if (currentPage < 1) {
+      setCurrentPage(currentPage + 1);
+    }
   }
 
   return (
