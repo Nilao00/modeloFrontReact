@@ -11,9 +11,18 @@ import "../style.css";
 interface Props {
   paginate(pageNumber: number): void;
   currentPosts: Task[];
+  currentPage: number;
+  nextPage(): void;
+  prevPage(): void;
 }
 
-const Tasks: React.FC<Props> = ({ paginate, currentPosts }) => {
+const Tasks: React.FC<Props> = ({
+  paginate,
+  currentPosts,
+  currentPage,
+  prevPage,
+  nextPage,
+}) => {
   const { deleteTask, task } = useConfigContext();
 
   const history = useHistory();
@@ -73,7 +82,14 @@ const Tasks: React.FC<Props> = ({ paginate, currentPosts }) => {
             })
           : "Não foram encontrados itens"}
       </div>
-      <Paginate postsPerPage={5} totalPosts={task.length} paginate={paginate} />
+      <Paginate
+        postsPerPage={5}
+        totalPosts={task.length}
+        currentPage={currentPage}
+        paginate={paginate}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
       <div className="styleFooterButton">
         <span>
           <button className="btnNewTask" onClick={createNewTask}>

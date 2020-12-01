@@ -17,7 +17,23 @@ const ContainerLoadingTask: React.FC = () => {
     setCurrentPage(pageNumber);
   }
 
-  return <LoadingView paginate={paginate} currentPosts={currentPosts} />;
+  function nextPage() {
+    setCurrentPage(currentPage + 1);
+  }
+
+  function prevPage() {
+    setCurrentPage(currentPage - 1);
+  }
+
+  return (
+    <LoadingView
+      paginate={paginate}
+      currentPosts={currentPosts}
+      currentPage={currentPage}
+      prevPage={prevPage}
+      nextPage={nextPage}
+    />
+  );
 };
 
 export default ContainerLoadingTask;

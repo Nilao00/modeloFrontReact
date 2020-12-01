@@ -8,3 +8,28 @@
     list-style-type: none !important;
     margin-top: 20px;
 }
+
+.buttonPrev {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    width: 90%;
+    background-color: blue;
+    color: white;
+    padding: 8px 20px;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+
+.buttonNext {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    width: 90%;
+    background-color: blue;
+    color: white;
+    padding: 8px 20px;
+    margin-top: 20px;
+}
