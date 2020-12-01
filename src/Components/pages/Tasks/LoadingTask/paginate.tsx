@@ -53,12 +53,11 @@ const Paginate: React.FC<Props> = ({
               </th>
             );
           })}
-          {totalPages > 1 &&
-            pagenumbers[pagenumbers.length - 1] !== totalPages && (
-              <button className="buttonNext" onClick={nextPage}>
-                Próximo
-              </button>
-            )}
+          {pagenumbers[pagenumbers.length - 1] !== currentPage && (
+            <button className="buttonNext" onClick={nextPage}>
+              Próximo
+            </button>
+          )}
         </Pages>
       </nav>
     </div>

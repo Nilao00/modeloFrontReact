@@ -1,16 +1,10 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 
-import { Task, paginateTaks } from "../Interfaces/Task";
+import { Task } from "../Interfaces/Task";
 
 export interface PropsMethods {
   task: Task[];
   limit: number;
-  tasksListPaginate(
-    page: number,
-    per_page: number,
-    pre_page: number,
-    next_page: number
-  ): paginateTaks;
   setTask: React.Dispatch<React.SetStateAction<Task[]>>;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
   createTask(taskCreate: Task): void;
@@ -55,25 +49,6 @@ export const ConfigContextProviderTask = ({ children }) => {
     }
   };
 
-  const handleTasksListPaginate = (
-    page: number,
-    per_page: number = 5,
-    pre_page: number,
-    next_page: number
-  ) => {
-    const paginate = {
-      page,
-      per_page,
-      pre_page,
-      next_page,
-      total: task.length,
-      total_pages: Math.ceil(task.length / per_page) || 1,
-      data: task.slice(0, 5),
-    };
-    console.log(paginate);
-    return paginate;
-  };
-
   return (
     <ConfigContextTaks.Provider
       value={{
@@ -84,7 +59,6 @@ export const ConfigContextProviderTask = ({ children }) => {
         createTask: handleTaskCreate,
         updateTask: handleTaskUpdate,
         deleteTask: handleTaskDelete,
-        tasksListPaginate: handleTasksListPaginate,
       }}
     >
       {children}
