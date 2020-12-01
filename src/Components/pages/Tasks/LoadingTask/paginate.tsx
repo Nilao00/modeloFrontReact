@@ -39,7 +39,6 @@ const Paginate: React.FC<Props> = ({
   }
 
   for (let page = maxLeft; page <= maxRight; page++) {
-    console.log(page)
     pagenumbers.push(page);
   }
 
