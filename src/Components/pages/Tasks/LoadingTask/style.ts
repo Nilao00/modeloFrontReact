@@ -13,7 +13,7 @@ export const Pages = styled.div`
       font-weight: bold;
       cursor: pointer;
       width: 90%;
-      background-color: black;
+      background-color: blue;
       color: white;
       padding: 8px 20px;
       margin: 8px 0;
