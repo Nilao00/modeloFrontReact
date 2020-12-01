@@ -12,7 +12,7 @@ const Paginate: React.FC<Props> = ({ postsPerPage, totalPosts, paginate }) => {
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pagenumbers.push(i);
   }
-  console.log(pagenumbers)
+  
   return (
     <div>
       <nav>

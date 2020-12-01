@@ -4,7 +4,6 @@ import LoadingView from "./";
 import { useConfigContext } from "../../../../Context/taskContext";
 
 const ContainerLoadingTask: React.FC = () => {
-    
   const { task } = useConfigContext();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -14,7 +13,9 @@ const ContainerLoadingTask: React.FC = () => {
   const indexOfFisrtPost = indexOfLastPost - postsPerPage;
   const currentPosts = task.slice(indexOfFisrtPost, indexOfLastPost);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  function paginate(pageNumber: number) {
+    setCurrentPage(pageNumber);
+  }
 
   return <LoadingView paginate={paginate} currentPosts={currentPosts} />;
 };
