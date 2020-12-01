@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useConfigContext } from "../../../../Context/taskContext";
 
 import LoadingView from "./";
-import { Task } from "../../../../Interfaces/Task";
+import { Task, paginateTaks } from "../../../../Interfaces/Task";
 
+const pageNumbers = [];
 const ContainerLoadingTask: React.FC = () => {
-  const { task, setTask, limit, setLimit } = useConfigContext();
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { task, limit, setLimit, tasksListPaginate } = useConfigContext();
+  const [tasks, setTasks] = useState<paginateTaks>();
   const [page, setPage] = useState<number>(1);
   function chargeMoreListTask(e: any): Task[] {
     let bottom =
@@ -22,11 +23,12 @@ const ContainerLoadingTask: React.FC = () => {
   }
 
   function setIndexPaginateButton() {
-    const pageNumbers = [];
-    let countPage = Math.floor(task.length / 3);
-    for (let index = 1; index < countPage; index++) {
+    const countPages = tasksListPaginate(page, 5, page, page);
+   for (let index = 1; index < countPages.total_pages; index++) {
       pageNumbers.push(index);
+      console.log(index)
     }
+    console.log(pageNumbers)
     return pageNumbers;
   }
 
@@ -34,11 +36,11 @@ const ContainerLoadingTask: React.FC = () => {
     setPage(pageNumber);
     if (pageNumber === 1) {
       setLimit(5);
-      setTasks(task.slice(0, 5));
+      //setTasks(task.slice(0, 5));
       return task;
     }
     setLimit(5 * pageNumber);
-    setTasks(task.slice(limit, task.length - (5 - limit)));
+    // setTasks(task.slice(limit, task.length - limit));
     return task;
   };
 
@@ -46,11 +48,11 @@ const ContainerLoadingTask: React.FC = () => {
     setPage(page - 1);
     if (page === 1) {
       setLimit(5);
-      setTasks(task.slice(0, 5));
+      // setTasks(task.slice(0, 5));
       return task;
     }
     setLimit(5 * page);
-    setTasks(task.slice(limit, 5 * page));
+    //  setTasks(task.slice(limit, 5 * page));
     return task;
   }
 
@@ -58,18 +60,18 @@ const ContainerLoadingTask: React.FC = () => {
     setPage(page + 1);
     if (page === 1) {
       setLimit(5);
-      setTasks(task.slice(0, 5));
+      //setTasks(task.slice(0, 5));
       return task;
     }
     setLimit(5 * page);
-    setTasks(task.slice(limit, 5 * page));
+    // setTasks(task.slice(limit, 5 * page));
     return task;
   }
 
   useEffect(() => {
-    setIndexPaginateButton();
-    setTasks(task);
-  }, [task]);
+      //setTasks(tasks);
+      setIndexPaginateButton();
+  }, [pageNumbers]);
 
   return (
     <LoadingView
@@ -77,8 +79,9 @@ const ContainerLoadingTask: React.FC = () => {
       setIndexPaginateButton={setIndexPaginateButton}
       nextPage={nextPage}
       prevPage={prevPage}
-      paginate={paginate}
-      tasks={tasks}
+      paginate={paginate}    
+      pageNumbers={pageNumbers}  
+      //     tasks={tasks}
     />
   );
 };

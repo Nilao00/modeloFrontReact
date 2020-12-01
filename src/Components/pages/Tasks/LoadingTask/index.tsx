@@ -8,6 +8,7 @@ import { useConfigContext } from "../../../../Context/taskContext";
 
 import { Task } from "../../../../Interfaces/Task";
 import "../style.css";
+import { number } from "prop-types";
 
 interface Props {
   chargeMoreListTask(e: any): Task[];
@@ -15,7 +16,8 @@ interface Props {
   paginate(pageNumber: number): Task[];
   nextPage(): Task[];
   prevPage(): Task[];
-  tasks: Task[];
+  pageNumbers: number[];
+  // tasks: Task[];
 }
 
 const Tasks: React.FC<Props> = ({
@@ -24,9 +26,10 @@ const Tasks: React.FC<Props> = ({
   paginate,
   prevPage,
   nextPage,
-  tasks,
+  pageNumbers,
+  // tasks,
 }) => {
-  const { deleteTask, task, limit } = useConfigContext();
+  const { deleteTask, task, limit, tasksListPaginate } = useConfigContext();
   const history = useHistory();
 
   function getItenForUpdate(id: number) {
@@ -49,8 +52,8 @@ const Tasks: React.FC<Props> = ({
     <div className="mainStyleViewTask">
       <div className="listViewStyleTasks">
         <h3 className="styleTitleTasks">Listagem de tarefas</h3>
-        {tasks.slice(0, limit).length > 0
-          ? tasks.slice(0, limit).map((itens, index) => {
+        {task.slice(0, limit).length > 0
+          ? task.slice(0, limit).map((itens, index) => {
               return (
                 <>
                   <div className="cardStyleTask" key={index}>
@@ -89,8 +92,12 @@ const Tasks: React.FC<Props> = ({
           <li onClick={prevPage} className="elementBtnPaginate">
             <a className="page-link">Anterior</a>
           </li>
-          {setIndexPaginateButton().map((number, index) => (
-            <li key={index} onClick={() => paginate(Number(number))} className="elementBtnPaginate">
+          {pageNumbers.map((number, index) => (
+            <li
+              key={index}
+              onClick={() => paginate(Number(number))}
+              className="elementBtnPaginate"
+            >
               <a className="page-link">{number}</a>
             </li>
           ))}
