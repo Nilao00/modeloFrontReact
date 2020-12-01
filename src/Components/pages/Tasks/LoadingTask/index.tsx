@@ -12,15 +12,19 @@ import "../style.css";
 interface Props {
   chargeMoreListTask(e: any): Task[];
   setIndexPaginateButton(): Task[];
-  paginate(pageNumber: number): number;
-  tasks:Task[]
+  paginate(pageNumber: number): Task[];
+  nextPage(): Task[];
+  prevPage(): Task[];
+  tasks: Task[];
 }
 
 const Tasks: React.FC<Props> = ({
   chargeMoreListTask,
   setIndexPaginateButton,
   paginate,
-  tasks
+  prevPage,
+  nextPage,
+  tasks,
 }) => {
   const { deleteTask, task, limit } = useConfigContext();
   const history = useHistory();
@@ -43,7 +47,7 @@ const Tasks: React.FC<Props> = ({
 
   return (
     <div className="mainStyleViewTask">
-      <div className="listViewStyleTasks" onScroll={chargeMoreListTask}>
+      <div className="listViewStyleTasks">
         <h3 className="styleTitleTasks">Listagem de tarefas</h3>
         {tasks.slice(0, limit).length > 0
           ? tasks.slice(0, limit).map((itens, index) => {
@@ -79,20 +83,22 @@ const Tasks: React.FC<Props> = ({
               );
             })
           : "Não foram encontrados itens"}
-       
       </div>
       <nav>
-          <ul className="pagination">
-            {console.log(task)}
-            {setIndexPaginateButton().map((number, index) => (
-              <li key={index} onClick={() => paginate(Number(number))}>
-                <a href="#" className="page-link">
-                  {number}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <ul className="pagination">
+          <li onClick={prevPage} className="elementBtnPaginate">
+            <a className="page-link">Anterior</a>
+          </li>
+          {setIndexPaginateButton().map((number, index) => (
+            <li key={index} onClick={() => paginate(Number(number))} className="elementBtnPaginate">
+              <a className="page-link">{number}</a>
+            </li>
+          ))}
+          <li onClick={nextPage} className="elementBtnPaginate">
+            <a className="page-link">Próximo</a>
+          </li>
+        </ul>
+      </nav>
       <div className="styleFooterButton">
         <span>
           <button className="btnNewTask" onClick={createNewTask}>

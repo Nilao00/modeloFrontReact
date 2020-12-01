@@ -4,10 +4,9 @@ import { useConfigContext } from "../../../../Context/taskContext";
 
 import LoadingView from "./";
 import { Task } from "../../../../Interfaces/Task";
-import { element } from "prop-types";
 
 const ContainerLoadingTask: React.FC = () => {
-  const { task, limit, setLimit } = useConfigContext();
+  const { task, setTask, limit, setLimit } = useConfigContext();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [page, setPage] = useState<number>(1);
   function chargeMoreListTask(e: any): Task[] {
@@ -24,11 +23,9 @@ const ContainerLoadingTask: React.FC = () => {
 
   function setIndexPaginateButton() {
     const pageNumbers = [];
-    let countPage = Math.floor(task.length / 2);
+    let countPage = Math.floor(task.length / 3);
     for (let index = 1; index < countPage; index++) {
-      if (index <= 5) {
-        pageNumbers.push(index);
-      }
+      pageNumbers.push(index);
     }
     return pageNumbers;
   }
@@ -36,14 +33,38 @@ const ContainerLoadingTask: React.FC = () => {
   const paginate = (pageNumber: number) => {
     setPage(pageNumber);
     if (pageNumber === 1) {
-      setLimit(5 * pageNumber);
-      setTasks(task.slice(pageNumber, limit));
-      return page;
+      setLimit(5);
+      setTasks(task.slice(0, 5));
+      return task;
     }
     setLimit(5 * pageNumber);
-    setTasks(task.slice(pageNumber, limit));
-    return page;
+    setTasks(task.slice(limit, task.length - (5 - limit)));
+    return task;
   };
+
+  function prevPage() {
+    setPage(page - 1);
+    if (page === 1) {
+      setLimit(5);
+      setTasks(task.slice(0, 5));
+      return task;
+    }
+    setLimit(5 * page);
+    setTasks(task.slice(limit, 5 * page));
+    return task;
+  }
+
+  function nextPage() {
+    setPage(page + 1);
+    if (page === 1) {
+      setLimit(5);
+      setTasks(task.slice(0, 5));
+      return task;
+    }
+    setLimit(5 * page);
+    setTasks(task.slice(limit, 5 * page));
+    return task;
+  }
 
   useEffect(() => {
     setIndexPaginateButton();
@@ -54,6 +75,8 @@ const ContainerLoadingTask: React.FC = () => {
     <LoadingView
       chargeMoreListTask={chargeMoreListTask}
       setIndexPaginateButton={setIndexPaginateButton}
+      nextPage={nextPage}
+      prevPage={prevPage}
       paginate={paginate}
       tasks={tasks}
     />
