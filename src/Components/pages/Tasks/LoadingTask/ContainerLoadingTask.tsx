@@ -7,11 +7,11 @@ const ContainerLoadingTask: React.FC = () => {
   const { task } = useConfigContext();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [postsPerPage] = useState(5);
+  const [tasksPerPage] = useState(5);
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFisrtPost = indexOfLastPost - postsPerPage;
-  const currentPosts = task.slice(indexOfFisrtPost, indexOfLastPost);
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFisrtTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = task.slice(indexOfFisrtTask, indexOfLastTask);
 
   function paginate(pageNumber: number) {
     setCurrentPage(pageNumber);
@@ -28,7 +28,7 @@ const ContainerLoadingTask: React.FC = () => {
   return (
     <LoadingView
       paginate={paginate}
-      currentPosts={currentPosts}
+      currentTasks={currentTasks}
       currentPage={currentPage}
       prevPage={prevPage}
       nextPage={nextPage}

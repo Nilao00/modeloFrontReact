@@ -10,7 +10,7 @@ import Paginate from "./paginate";
 import "../style.css";
 interface Props {
   paginate(pageNumber: number): void;
-  currentPosts: Task[];
+  currentTasks: Task[];
   currentPage: number;
   nextPage(): void;
   prevPage(): void;
@@ -18,7 +18,7 @@ interface Props {
 
 const Tasks: React.FC<Props> = ({
   paginate,
-  currentPosts,
+  currentTasks,
   currentPage,
   prevPage,
   nextPage,
@@ -47,8 +47,8 @@ const Tasks: React.FC<Props> = ({
     <div className="mainStyleViewTask">
       <div className="listViewStyleTasks">
         <h3 className="styleTitleTasks">Listagem de tarefas</h3>
-        {currentPosts.length > 0
-          ? currentPosts.map((itens, index) => {
+        {currentTasks.length > 0
+          ? currentTasks.map((itens, index) => {
               return (
                 <>
                   <div className="cardStyleTask" key={index}>

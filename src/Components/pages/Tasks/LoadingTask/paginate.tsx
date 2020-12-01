@@ -29,7 +29,7 @@ const Paginate: React.FC<Props> = ({
   }
 
   return (
-    <div>
+    <div className="styleFooterButton">
       <nav>
         <Pages
           style={{
