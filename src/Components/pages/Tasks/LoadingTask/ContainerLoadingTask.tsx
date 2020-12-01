@@ -13,7 +13,6 @@ const ContainerLoadingTask: React.FC = () => {
   let start = page * tasksPerPage;
   let end = start + tasksPerPage;
   let currentTasks = task.slice(start, end);
-  console.log(currentTasks)
 
   function paginate(pageNumber: number) {
     setCurrentPage(pageNumber);
