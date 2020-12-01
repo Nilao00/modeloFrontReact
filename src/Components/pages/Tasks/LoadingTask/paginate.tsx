@@ -21,7 +21,7 @@ const Paginate: React.FC<Props> = ({
 }) => {
   const pagenumbers: number[] = [];
   const maxVisibleButtons = 5;
-  const totalPages = totalPosts / postsPerPage;
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
 
   let maxLeft = currentPage - Math.floor(maxVisibleButtons / 2);
   let maxRight = currentPage + Math.floor(maxVisibleButtons / 2);
@@ -39,7 +39,8 @@ const Paginate: React.FC<Props> = ({
   }
 
   for (let page = maxLeft; page <= maxRight; page++) {
-    pagenumbers.push(Math.ceil(page));
+    console.log(page)
+    pagenumbers.push(page);
   }
 
   return (
