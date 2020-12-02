@@ -1,19 +1,23 @@
 import { UsersType, types } from "../Types/users";
-import { UserMethods } from "../../Interfaces/Users";
+import { Users, UserStateObject } from "../../Interfaces/Users";
 
-const INITIAL_STATE: UserMethods = {
-  users: [],
+const INITIAL_STATE: UserStateObject = {
+  users: {
+    id: {
+      name: [],
+    },
+  },
 };
 
 function ActionsUser(state = INITIAL_STATE, action: UsersType) {
   switch (action.type) {
     case types.getOneUser:
       return {
-        users: [...state.users, action.payload],
+        users: [...state.users.id.name, action.payload],
       };
     case types.getUsersSeach:
       return {
-        users: [...state.users, action.payload],
+        users: [...state.users.id.name, action.payload],
       };
     default:
       return state;

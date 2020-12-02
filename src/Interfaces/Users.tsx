@@ -10,3 +10,11 @@ export interface Users {
 export interface UserMethods {
   users: Users[];
 }
+
+export interface UserStateObject {
+  users: {
+    id: {
+      name: Users[];
+    };
+  };
+}

@@ -12,3 +12,10 @@ export interface Task {
 export interface TaskState {
   tasks: Task[];
 }
+export interface TaskStateObject {
+  tasks: {
+    id: {
+      name: Task[];
+    };
+  };
+}
