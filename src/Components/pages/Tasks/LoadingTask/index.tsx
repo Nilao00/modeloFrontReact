@@ -80,7 +80,7 @@ const Tasks: React.FC<Props> = ({
                 </>
               );
             })
-          : "Não foram encontrados itens"}
+          : "Não foram encontradas tarefas"}
       </div>
       <Paginate
         postsPerPage={5}
