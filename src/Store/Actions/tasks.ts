@@ -11,14 +11,14 @@ export function getAllTask(payload: Task[]): TasksType {
 export function setNewTask(payload: Task): TasksType {
   return {
     type: types.getTasks,
-    payload: payload,
+    payload: { [payload.id]: payload },
   };
 }
 
 export function updateTask(payload: Task): TasksType {
   return {
     type: types.getTasks,
-    payload,
+    payload: { [payload.id]: payload },
   };
 }
 

@@ -50,34 +50,32 @@ const Tasks: React.FC<Props> = ({
         {currentTasks.length > 0
           ? currentTasks.map((itens, index) => {
               return (
-                <>
-                  <div className="cardStyleTask" key={index}>
-                    <span style={{ wordBreak: "break-word", maxWidth: 80 }}>
-                      {itens.id +
-                        " - " +
-                        itens.name +
-                        " - " +
-                        (itens.finish ? "Atividade feita" : "Não feita")}
-                      {itens.waytask.length > 0 &&
-                        itens.waytask
-                          .map((element) => element.description)
-                          .join(";")}
-                    </span>
-                    <span>{formatDate(itens.dtCreate)}</span>
-                    <button
-                      onClick={() => getItenForUpdate(itens.id)}
-                      className="btnNewTaskEdit"
-                    >
-                      Editar
-                    </button>
-                    <button
-                      onClick={() => deleteTask(itens.id)}
-                      className="btnNewTaskDel"
-                    >
-                      Deletar
-                    </button>
-                  </div>
-                </>
+                <div className="cardStyleTask" key={index}>
+                  <span style={{ wordBreak: "break-word", maxWidth: 80 }}>
+                    {itens.id +
+                      " - " +
+                      itens.name +
+                      " - " +
+                      (itens.finish ? "Atividade feita" : "Não feita")}
+                    {itens.waytask.length > 0 &&
+                      itens.waytask
+                        .map((element) => element.description)
+                        .join(";")}
+                  </span>
+                  <span>{formatDate(itens.dtCreate)}</span>
+                  <button
+                    onClick={() => getItenForUpdate(itens.id)}
+                    className="btnNewTaskEdit"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    onClick={() => deleteTask(itens.id)}
+                    className="btnNewTaskDel"
+                  >
+                    Deletar
+                  </button>
+                </div>
               );
             })
           : "Não foram encontradas tarefas"}

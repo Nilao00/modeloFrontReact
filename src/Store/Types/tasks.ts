@@ -5,6 +5,7 @@ export const types = {
   setTasks: "SET_NEW_TASK",
   updateTask: "UPDATE_TASK",
   deleteTask: "DELETE_TASK",
+  task: "GET_ELEMENT_TASK",
 };
 
 interface getAllTasksInterface {
@@ -14,12 +15,12 @@ interface getAllTasksInterface {
 
 interface setNewTaskInterface {
   type: typeof types.setTasks;
-  payload: Task;
+  payload: { [id: number]: Task };
 }
 
 interface updateNewTaskInterface {
   type: typeof types.updateTask;
-  payload: Task;
+  payload: { [id: number]: Task };
 }
 
 interface deleteNewTaskInterface {

@@ -1,3 +1,4 @@
+import { number } from "prop-types";
 import { TasksType, types } from "../Types/tasks";
 import { Task, TaskStateObject } from "../../Interfaces/Task";
 
@@ -8,25 +9,23 @@ const INITIAL_STATE: TaskStateObject = {
   allId: [],
 };
 
-function ActionsTasks(
-  state = INITIAL_STATE,
-  action: { TasksType: TasksType; Task: Task }
-) {
-  switch (action.TasksType.type) {
+function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
+  console.log(state);
+  switch (action.type) {
     case types.getTasks:
       return {
         tasks: {
           ...state.tasks,
-          byId: { [action.Task.id]: action.TasksType.payload },
-          allId: [...state.allId, action.Task.id],
+          byId: { ["action.payload"]: action.payload },
+          allId: [...state.allId, action.payload],
         },
       };
     case types.setTasks:
       return {
         tasks: {
           ...state.tasks,
-          byId: { [action.Task.id]: action.TasksType.payload },
-          allId: [...state.allId, action.Task.id],
+          byId: { ...state.tasks.byId, byId: action.payload },
+          allId: [...state.allId, action.payload],
         },
       };
     case types.updateTask:
@@ -34,12 +33,13 @@ function ActionsTasks(
         tasks: {
           ...state.tasks,
           byId: {
-            [action.Task.id]: {
+            ...state.tasks.byId,
+            byId: {
               ...state.tasks.byId,
-              id: action.TasksType.payload,
+              id: action.payload,
             },
           },
-          allId: [...state.allId, action.Task.id],
+          allId: [...state.allId, action.payload],
         },
       };
     default:

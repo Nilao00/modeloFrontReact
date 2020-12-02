@@ -1,11 +1,19 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import LoadingView from "./";
 import { useConfigContext } from "../../../../Context/taskContext";
 
+import { TaskStateObject } from "../../../../Interfaces/Task";
 
+interface RootState {
+  tasks: TaskStateObject;
+}
 const ContainerLoadingTask: React.FC = () => {
   const { task } = useConfigContext();
+
+  const tasks = useSelector((state: RootState) => state.tasks);
+  console.log(tasks);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [tasksPerPage] = useState(5);

@@ -4,6 +4,8 @@ import * as Yup from "yup";
 
 import { Task } from "../../../../Interfaces/Task";
 import { useConfigContext } from "../../../../Context/taskContext";
+import { saveNewTask } from "./Redux/actions";
+
 import NewTask from "./";
 
 interface Description {
@@ -27,6 +29,7 @@ const NewTaskContainer: React.FC = () => {
       dtCreate: new Date(),
     };
     createTask(objCreateTask);
+    saveNewTask(objCreateTask);
     history.push("/tasks");
   }
 

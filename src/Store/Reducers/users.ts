@@ -8,25 +8,22 @@ const INITIAL_STATE: UserStateObject = {
   allId: [],
 };
 
-function ActionsUser(
-  state = INITIAL_STATE,
-  action: { UsersType: UsersType; Users: Users }
-) {
-  switch (action.UsersType.type) {
+function ActionsUser(state = INITIAL_STATE, action: UsersType) {
+  switch (action.type) {
     case types.getOneUser:
       return {
         users: {
           ...state.users,
-          byId: { [action.Users.id]: action.UsersType.payload },
-          allId: [...state.allId, action.Users.id],
+          byId: { ["action.payload"]: action.payload },
+          allId: [...state.allId, action.payload],
         },
       };
     case types.getUsersSeach:
       return {
         users: {
           ...state.users,
-          byId: { [action.Users.id]: action.UsersType.payload },
-          allId: [...state.allId, action.Users.id],
+          byId: { ["action.payload"]: action.payload },
+          allId: [...state.allId, action.payload],
         },
       };
     default:
