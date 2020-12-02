@@ -3,21 +3,31 @@ import { Users, UserStateObject } from "../../Interfaces/Users";
 
 const INITIAL_STATE: UserStateObject = {
   users: {
-    id: {
-      name: [],
-    },
+    byId: {} as Users,
   },
+  allId: [],
 };
 
-function ActionsUser(state = INITIAL_STATE, action: UsersType) {
-  switch (action.type) {
+function ActionsUser(
+  state = INITIAL_STATE,
+  action: { UsersType: UsersType; Users: Users }
+) {
+  switch (action.UsersType.type) {
     case types.getOneUser:
       return {
-        users: [...state.users.id.name, action.payload],
+        users: {
+          ...state.users,
+          byId: action.UsersType.payload,
+          allId: [...state.allId, action.Users.id],
+        },
       };
     case types.getUsersSeach:
       return {
-        users: [...state.users.id.name, action.payload],
+        users: {
+          ...state.users,
+          byId: action.UsersType.payload,
+          allId: [...state.allId, action.Users.id],
+        },
       };
     default:
       return state;

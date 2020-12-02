@@ -13,8 +13,7 @@ export interface UserMethods {
 
 export interface UserStateObject {
   users: {
-    id: {
-      name: Users[];
-    };
+    byId: Users;
   };
+  allId: number[];
 }
