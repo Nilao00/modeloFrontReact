@@ -8,3 +8,7 @@ export interface Task {
   dtCreate: Date;
   waytask: Description[];
 }
+
+export interface TaskState {
+  tasks: Task[];
+}

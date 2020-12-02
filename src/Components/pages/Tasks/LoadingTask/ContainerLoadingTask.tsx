@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import LoadingView from "./";
 import { useConfigContext } from "../../../../Context/taskContext";
 
+import {} from '../../../../Store';
+
 const ContainerLoadingTask: React.FC = () => {
   const { task } = useConfigContext();
 
