@@ -17,7 +17,7 @@ function ActionsTasks(
       return {
         tasks: {
           ...state.tasks,
-          byId: action.TasksType.payload,
+          byId: { [action.Task.id]: action.TasksType.payload },
           allId: [...state.allId, action.Task.id],
         },
       };
@@ -25,7 +25,7 @@ function ActionsTasks(
       return {
         tasks: {
           ...state.tasks,
-          byId: action.TasksType.payload,
+          byId: { [action.Task.id]: action.TasksType.payload },
           allId: [...state.allId, action.Task.id],
         },
       };
@@ -33,7 +33,7 @@ function ActionsTasks(
       return {
         tasks: {
           ...state.tasks,
-          byId: action.TasksType.payload,
+          byId: { [action.Task.id]: action.TasksType.payload },
           allId: [...state.allId, action.Task.id],
         },
       };
@@ -41,7 +41,7 @@ function ActionsTasks(
       return {
         tasks: {
           ...state.tasks,
-          byId: action.TasksType.payload,
+          byId: { [action.Task.id]: action.TasksType.payload },
           allId: [...state.allId, action.Task.id],
         },
       };

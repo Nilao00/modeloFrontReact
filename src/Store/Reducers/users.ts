@@ -17,7 +17,7 @@ function ActionsUser(
       return {
         users: {
           ...state.users,
-          byId: action.UsersType.payload,
+          byId: { [action.Users.id]: action.UsersType.payload },
           allId: [...state.allId, action.Users.id],
         },
       };
@@ -25,7 +25,7 @@ function ActionsUser(
       return {
         users: {
           ...state.users,
-          byId: action.UsersType.payload,
+          byId: { [action.Users.id]: action.UsersType.payload },
           allId: [...state.allId, action.Users.id],
         },
       };
