@@ -1,17 +1,17 @@
 import { TasksType, types } from "../Types/tasks";
 import { Task } from "../../Interfaces/Task";
 
-export function getAllTask(): TasksType {
+export function getAllTask(payload: Task[]): TasksType {
   return {
     type: types.getTasks,
-    payload: [],
+    payload,
   };
 }
 
 export function setNewTask(payload: Task): TasksType {
   return {
     type: types.getTasks,
-    payload:payload,
+    payload: payload,
   };
 }
 
@@ -28,4 +28,3 @@ export function deleteTask(): TasksType {
     payload: 0 || 1,
   };
 }
-

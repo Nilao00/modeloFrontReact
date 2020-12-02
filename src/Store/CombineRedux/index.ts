@@ -1,9 +1,13 @@
 import { combineReducers } from "redux";
 
-import { ActionsTasks } from "../Reducers/tasks";
+import ActionsTasks from "../Reducers/tasks";
+import ActionsUser from "../Reducers/users";
 
-const rootReducer = combineReducers({
-  task: ActionsTasks,
+console.log(ActionsTasks)
+
+const rootReducer =  combineReducers({
+  ActionsTasks,
+  ActionsUser,
 });
 
 export default rootReducer;

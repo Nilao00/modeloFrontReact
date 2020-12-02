@@ -2,14 +2,14 @@ import { TasksType, types } from "../Types/tasks";
 import { TaskState } from "../../Interfaces/Task";
 
 const INITIAL_STATE: TaskState = {
-  tasks: [],
+  tasks: [],  
 };
 
-export function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
+export default function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
   switch (action.type) {
     case types.getTasks:
       return {
-        tasks: [...state.tasks],
+        tasks: [...state.tasks, action.payload],
       };
     case types.setTasks:
       return {
