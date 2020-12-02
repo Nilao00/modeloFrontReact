@@ -15,7 +15,7 @@ export function setNewTask(payload: Task): TasksType {
   };
 }
 
-export function updateTask(payload: Task[]): TasksType {
+export function updateTask(payload: Task): TasksType {
   return {
     type: types.getTasks,
     payload,
