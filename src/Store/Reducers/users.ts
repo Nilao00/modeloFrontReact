@@ -3,7 +3,7 @@ import { Users, UserStateObject } from "../../Interfaces/Users";
 
 const INITIAL_STATE: UserStateObject = {
   users: {
-    byId: {} as Users,
+    byId: {},
   },
   allId: [],
 };

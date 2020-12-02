@@ -3,7 +3,7 @@ import { Task, TaskStateObject } from "../../Interfaces/Task";
 
 const INITIAL_STATE: TaskStateObject = {
   tasks: {
-    byId: {} as Task,
+    byId: {},
   },
   allId: [],
 };
@@ -33,15 +33,12 @@ function ActionsTasks(
       return {
         tasks: {
           ...state.tasks,
-          byId: { [action.Task.id]: action.TasksType.payload },
-          allId: [...state.allId, action.Task.id],
-        },
-      };
-    case types.updateTask:
-      return {
-        tasks: {
-          ...state.tasks,
-          byId: { [action.Task.id]: action.TasksType.payload },
+          byId: {
+            [action.Task.id]: {
+              ...state.tasks.byId,
+              id: action.TasksType.payload,
+            },
+          },
           allId: [...state.allId, action.Task.id],
         },
       };

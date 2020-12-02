@@ -13,7 +13,9 @@ export interface UserMethods {
 
 export interface UserStateObject {
   users: {
-    byId: Users;
+    byId: {
+      [id: number]: Users;
+    };
   };
   allId: number[];
 }

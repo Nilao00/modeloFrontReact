@@ -14,7 +14,9 @@ export interface TaskState {
 }
 export interface TaskStateObject {
   tasks: {
-    byId: Task;
+    byId: {
+      [id: number]: Task;
+    };
   };
   allId: number[];
 }
