@@ -2,7 +2,7 @@ import { TasksType, types } from "../Types/tasks";
 import { TaskState } from "../../Interfaces/Task";
 
 const INITIAL_STATE: TaskState = {
-  tasks: [],  
+  tasks: [],
 };
 
 function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
@@ -24,7 +24,7 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
         tasks: [...state.tasks, action.payload],
       };
     default:
-     return state;
+      return state;
   }
 }
 export default ActionsTasks;
