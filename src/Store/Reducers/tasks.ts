@@ -5,7 +5,7 @@ const INITIAL_STATE: TaskState = {
   tasks: [],  
 };
 
-export default function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
+function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
   switch (action.type) {
     case types.getTasks:
       return {
@@ -24,6 +24,7 @@ export default function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
         tasks: [...state.tasks, action.payload],
       };
     default:
-      state;
+     return state;
   }
 }
+export default ActionsTasks;
