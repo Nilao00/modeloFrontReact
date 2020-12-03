@@ -6,6 +6,8 @@ import { Task } from "../../../../Interfaces/Task";
 import { useConfigContext } from "../../../../Context/taskContext";
 import UpdateTask from "./";
 
+import updateTaskRedux from "./Redux/actions";
+
 interface Description {
   description: string;
 }
@@ -32,6 +34,7 @@ const UpdateTaskContainer: React.FC = () => {
       dtCreate: new Date(),
     };
     updateTask(Number(id), objUp);
+    updateTaskRedux(objUp);
     history.push("/tasks");
   }
 

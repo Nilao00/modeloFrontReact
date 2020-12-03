@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 
 import LoadingView from "./";
 import { useConfigContext } from "../../../../Context/taskContext";
 
-import { TaskStateObject } from "../../../../Interfaces/Task";
+import deleteTaskRedux from './Redux/actions';
 
-interface RootState {
-  tasks: TaskStateObject;
-}
 const ContainerLoadingTask: React.FC = () => {
   const { task } = useConfigContext();
-
-  const tasks = useSelector((state: RootState) => state.tasks);
-  console.log(tasks)
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [tasksPerPage] = useState(5);
@@ -50,6 +43,7 @@ const ContainerLoadingTask: React.FC = () => {
       currentPage={currentPage}
       prevPage={prevPage}
       nextPage={nextPage}
+      deleteTaskRedux={deleteTaskRedux}
     />
   );
 };

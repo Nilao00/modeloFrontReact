@@ -5,8 +5,8 @@ import { Task, TaskStateObject } from "../../Interfaces/Task";
 const INITIAL_STATE: TaskStateObject = {
   tasks: {
     byId: {},
+    allId: [],
   },
-  allId: [],
 };
 
 function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
@@ -16,7 +16,7 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
         tasks: {
           ...state.tasks,
           byId: { ["action.payload"]: action.payload },
-          allId: [...state.allId, action.payload],
+          allId: [...state.tasks.allId, action.payload],
         },
       };
     case types.setTasks:
@@ -27,7 +27,7 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
             ...state.tasks.byId,
             [action["payload"]["id"]]: action["payload"],
           },
-          allId: [...state.allId, action["payload"]["id"]],
+          allId: [...state.tasks.allId, action["payload"]["id"]],
         },
       };
     case types.updateTask:
@@ -36,12 +36,26 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
           ...state.tasks,
           byId: {
             ...state.tasks.byId,
-            byId: {
-              ...state.tasks.byId,
-              [action["payload"]["id"]]: action["payload"],
-            },
+            [action["payload"]["id"]]: action["payload"],
           },
-          allId: [...state.allId, Object.keys(action.payload)],
+          allId: [...state.tasks.allId],
+        },
+      };
+    case types.deleteTask:
+      console.log(state.tasks.byId[Number(action.payload)]["id"]);
+      return {
+        tasks: {
+          ...state.tasks,
+          byId:
+            delete state.tasks.byId[
+              state.tasks.byId[Number(action.payload)]["id"]
+            ] && {},
+          allId: state.tasks.allId.splice(
+            state.tasks.allId.indexOf(
+              state.tasks.byId[Number(action.payload)]["id"]
+            ),
+            1
+          ),
         },
       };
     default:

@@ -22,9 +22,9 @@ export function updateTask(payload: Task): TasksType {
   };
 }
 
-export function deleteTask(): TasksType {
+export function deleteTask(payload: number): TasksType {
   return {
     type: types.getTasks,
-    payload: 0 || 1,
+    payload,
   };
 }

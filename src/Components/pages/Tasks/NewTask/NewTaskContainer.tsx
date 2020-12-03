@@ -20,9 +20,7 @@ interface initialValues {
 
 const NewTaskContainer: React.FC = () => {
   const history = useHistory();
-
-  const tasks = store.getState().ActionsTasks.tasks;
-
+  
   const { createTask } = useConfigContext();
 
   function taskCreateResponse(name: string, waytask: Description[]) {
