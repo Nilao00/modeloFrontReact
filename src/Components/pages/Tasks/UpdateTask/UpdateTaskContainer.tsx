@@ -8,15 +8,19 @@ import UpdateTask from "./";
 
 import updateTaskRedux from "./Redux/actions";
 
+import { listTasks } from "../LoadingTask/Redux/actions";
+
 interface Description {
   description: string;
 }
 const UpdateTaskContainer: React.FC = () => {
   const { id }: { id: string } = useParams();
   const history = useHistory();
-  const { updateTask, task } = useConfigContext();
+  const { updateTask } = useConfigContext();
 
-  const taskEditedCurrent = task.find((itens) => itens.id === Number(id));
+  const taskEditedCurrent = listTasks().find(
+    (itens) => itens.id === Number(id)
+  );
 
   function updateTaskResponse(
     name: string,

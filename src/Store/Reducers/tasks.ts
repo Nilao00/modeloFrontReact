@@ -11,14 +11,6 @@ const INITIAL_STATE: TaskStateObject = {
 
 function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
   switch (action.type) {
-    case types.getTasks:
-      return {
-        tasks: {
-          ...state.tasks,
-          byId: { ["action.payload"]: action.payload },
-          allId: [...state.tasks.allId, action.payload],
-        },
-      };
     case types.setTasks:
       return {
         tasks: {

@@ -15,6 +15,7 @@ interface Props {
   nextPage(): void;
   prevPage(): void;
   deleteTaskRedux(id: number): void;
+  task: Task[];
 }
 
 const Tasks: React.FC<Props> = ({
@@ -24,8 +25,8 @@ const Tasks: React.FC<Props> = ({
   prevPage,
   nextPage,
   deleteTaskRedux,
+  task,
 }) => {
-  const { deleteTask, task } = useConfigContext();
 
   const history = useHistory();
 
@@ -72,10 +73,7 @@ const Tasks: React.FC<Props> = ({
                     Editar
                   </button>
                   <button
-                    onClick={() => {
-                      deleteTask(itens.id);
-                      deleteTaskRedux(itens.id);
-                    }}
+                    onClick={() => deleteTaskRedux(itens.id)}
                     className="btnNewTaskDel"
                   >
                     Deletar
