@@ -42,19 +42,17 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
         },
       };
     case types.deleteTask:
-      console.log(state.tasks.byId[Number(action.payload)]["id"]);
+      const newState = Object.keys(state.tasks.byId).reduce((r, e) => {
+        if (!action.payload[e]) r[e] = state.tasks.byId[e];
+        delete r[action.payload.toString()];
+        return r;
+      }, {});
       return {
         tasks: {
           ...state.tasks,
-          byId:
-            delete state.tasks.byId[
-              state.tasks.byId[Number(action.payload)]["id"]
-            ] && {},
-          allId: state.tasks.allId.splice(
-            state.tasks.allId.indexOf(
-              state.tasks.byId[Number(action.payload)]["id"]
-            ),
-            1
+          byId: newState,
+          allId: state.tasks.allId.filter(
+            (idFilter) => idFilter !== action.payload
           ),
         },
       };
