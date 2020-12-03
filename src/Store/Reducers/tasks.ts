@@ -44,7 +44,7 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
           ...state.tasks,
           byId: newState,
           allId: state.tasks.allId.filter(
-            (idFilter) => idFilter !== action.payload
+            (idFilter) => idFilter !== Number(action.payload)
           ),
         },
       };

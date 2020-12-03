@@ -7,7 +7,7 @@ import { deleteTask as deleteTaskRedux, listTasks } from "./Redux/actions";
 import { Task } from "../../../../Interfaces/Task";
 
 const ContainerLoadingTask: React.FC = () => {
-  const [task] = useState<Task[]>(listTasks());
+  const [task, setTask] = useState<Task[]>(listTasks());
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [tasksPerPage] = useState(5);
@@ -41,13 +41,9 @@ const ContainerLoadingTask: React.FC = () => {
     const confirmDelTask = confirm("Deseja deletar essa tarefa?");
     if (confirmDelTask) {
       deleteTaskRedux(id);
-      return task;
+      return id;
     }
   }
-
-  useEffect(() => {
-    listTasks();
-  }, [task]);
 
   return (
     <LoadingView
@@ -56,8 +52,9 @@ const ContainerLoadingTask: React.FC = () => {
       currentPage={currentPage}
       prevPage={prevPage}
       nextPage={nextPage}
-      deleteTaskRedux={deleteTaskReduxConfirm}
+      deleteTaskReduxConfirm={deleteTaskReduxConfirm}
       task={task}
+      setTask={setTask}
     />
   );
 };

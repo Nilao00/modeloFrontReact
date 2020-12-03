@@ -3,12 +3,11 @@ import { Task } from "./../../../../../Interfaces/Task";
 import { store } from "../../../../../Store";
 import { types } from "../../../../../Store/Types/tasks";
 
-export function deleteTask(id: number) {
+export function deleteTask(payload: number) {
   store.dispatch({
     type: types.deleteTask,
-    payload: id,
+    payload,
   });
-  return listTasks();
 }
 
 export function listTasks() {

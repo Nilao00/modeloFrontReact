@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useHistory } from "react-router-dom";
 
 import formatDate from "../../../../utils";
-import { useConfigContext } from "../../../../Context/taskContext";
 import { Task } from "../../../../Interfaces/Task";
 import Paginate from "./paginate";
+
+import { store } from "../../../../Store";
+import { listTasks } from "./Redux/actions";
 
 import "../style.css";
 interface Props {
@@ -14,8 +16,9 @@ interface Props {
   currentPage: number;
   nextPage(): void;
   prevPage(): void;
-  deleteTaskRedux(id: number): void;
+  deleteTaskReduxConfirm(id: number): number;
   task: Task[];
+  setTask: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 const Tasks: React.FC<Props> = ({
@@ -24,10 +27,10 @@ const Tasks: React.FC<Props> = ({
   currentPage,
   prevPage,
   nextPage,
-  deleteTaskRedux,
+  deleteTaskReduxConfirm,
   task,
+  setTask,
 }) => {
-
   const history = useHistory();
 
   function getItenForUpdate(id: number) {
@@ -45,6 +48,10 @@ const Tasks: React.FC<Props> = ({
   function searchRepositoryGit() {
     return history.push("/gitrepositorieslists");
   }
+
+  useEffect(() => {
+    setTask(listTasks)
+  }, [deleteTaskReduxConfirm]);
 
   return (
     <div className="mainStyleViewTask">
@@ -73,7 +80,7 @@ const Tasks: React.FC<Props> = ({
                     Editar
                   </button>
                   <button
-                    onClick={() => deleteTaskRedux(itens.id)}
+                    onClick={() => deleteTaskReduxConfirm(itens.id)}
                     className="btnNewTaskDel"
                   >
                     Deletar

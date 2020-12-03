@@ -17,7 +17,7 @@ interface updateNewTaskInterface {
 }
 
 interface deleteNewTaskInterface {
-  type: typeof types.updateTask;
+  type: typeof types.deleteTask;
   payload: number;
 }
 
