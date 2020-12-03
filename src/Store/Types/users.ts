@@ -1,3 +1,5 @@
+import { Users } from './../../Interfaces/Users';
+
 export const types = {
   getUsersSeach: "GET_SEARCH_USERS",
   getOneUser: "GET_ONE_USER",
@@ -6,12 +8,12 @@ export const types = {
 
 interface getSearchUsersInterface {
   type: typeof types.getUsersSeach;
-  payload: string;
+  payload: Users[];
 }
 
 interface getOneUserInterface {
   type: typeof types.getOneUser;
-  payload: string;
+  payload: Users;
 }
 
 interface showErrorUserInterface {

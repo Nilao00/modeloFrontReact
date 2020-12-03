@@ -16,7 +16,7 @@ export function getOneUser(payload: string): UsersType {
 
 export function showErrorUser(payload: string): UsersType {
   return {
-    type: types.getOneUser,
+    type: types.messageErrorUser,
     payload,
   };
 }
