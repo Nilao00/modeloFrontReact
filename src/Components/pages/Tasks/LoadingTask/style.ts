@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export const Pages = styled.div`
-  > th {
+  > div {
     border: none;
     
     top: 0;

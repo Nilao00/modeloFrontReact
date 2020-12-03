@@ -58,7 +58,7 @@ const Paginate: React.FC<Props> = ({
           )}
           {pagenumbers.map((item) => {
             return (
-              <th
+              <div
                 onClick={() => paginate(item)}
                 key={item}
                 className="page-item"
@@ -69,7 +69,7 @@ const Paginate: React.FC<Props> = ({
                 >
                   {item}
                 </button>
-              </th>
+              </div>
             );
           })}
           {pagenumbers[pagenumbers.length - 1] !== currentPage &&
