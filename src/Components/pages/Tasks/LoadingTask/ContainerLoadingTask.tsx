@@ -13,7 +13,7 @@ const ContainerLoadingTask: React.FC = () => {
   const { task } = useConfigContext();
 
   const tasks = useSelector((state: RootState) => state.tasks);
-  console.log(tasks);
+  console.log(tasks)
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [tasksPerPage] = useState(5);

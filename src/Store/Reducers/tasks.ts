@@ -10,7 +10,6 @@ const INITIAL_STATE: TaskStateObject = {
 };
 
 function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
-  console.log(state);
   switch (action.type) {
     case types.getTasks:
       return {
@@ -24,8 +23,11 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
       return {
         tasks: {
           ...state.tasks,
-          byId: { ...state.tasks.byId, byId: action.payload },
-          allId: [...state.allId, action.payload],
+          byId: {
+            ...state.tasks.byId,
+            [action["payload"]["id"]]: action["payload"],
+          },
+          allId: [...state.allId, action["payload"]["id"]],
         },
       };
     case types.updateTask:
@@ -36,10 +38,10 @@ function ActionsTasks(state = INITIAL_STATE, action: TasksType) {
             ...state.tasks.byId,
             byId: {
               ...state.tasks.byId,
-              id: action.payload,
+              [action["payload"]["id"]]: action["payload"],
             },
           },
-          allId: [...state.allId, action.payload],
+          allId: [...state.allId, Object.keys(action.payload)],
         },
       };
     default:

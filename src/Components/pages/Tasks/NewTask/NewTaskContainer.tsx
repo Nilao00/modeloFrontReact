@@ -2,9 +2,11 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
-import { Task } from "../../../../Interfaces/Task";
+import { Task, TaskStateObject } from "../../../../Interfaces/Task";
 import { useConfigContext } from "../../../../Context/taskContext";
-import { saveNewTask } from "./Redux/actions";
+import saveNewTask from "./Redux/actions";
+
+import { store } from "../../../../Store/";
 
 import NewTask from "./";
 
@@ -15,8 +17,11 @@ interface initialValues {
   name: string;
   waytask: Description[];
 }
+
 const NewTaskContainer: React.FC = () => {
   const history = useHistory();
+
+  const tasks = store.getState().ActionsTasks.tasks;
 
   const { createTask } = useConfigContext();
 
@@ -24,9 +29,9 @@ const NewTaskContainer: React.FC = () => {
     const objCreateTask: Task = {
       id: Math.floor(Math.random() * 999),
       name,
-      waytask,
       finish: false,
       dtCreate: new Date(),
+      waytask,
     };
     createTask(objCreateTask);
     saveNewTask(objCreateTask);
