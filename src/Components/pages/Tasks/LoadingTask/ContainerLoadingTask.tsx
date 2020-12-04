@@ -37,13 +37,17 @@ const ContainerLoadingTask: React.FC = () => {
     }
   }
 
-  function deleteTaskReduxConfirm(id: number) {
+  function deleteTaskReduxConfirm(id: number): boolean {
     const confirmDelTask = confirm("Deseja deletar essa tarefa?");
     if (confirmDelTask) {
       deleteTaskRedux(id);
-      return id;
+      setTask(listTasks());
+      return true;
     }
+    return false;
   }
+
+;
 
   return (
     <LoadingView

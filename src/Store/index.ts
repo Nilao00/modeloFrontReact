@@ -1,11 +1,10 @@
-import rootState from "./CombineRedux";
-
 import { createStore, applyMiddleware } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 
+import rootState from "./CombineRedux";
 import rootSaga from "./Sagas/rootSaga";
 
 const persistConfig = {

@@ -6,8 +6,7 @@ import formatDate from "../../../../utils";
 import { Task } from "../../../../Interfaces/Task";
 import Paginate from "./paginate";
 
-import { store } from "../../../../Store";
-import { listTasks } from "./Redux/actions";
+import { deleteTask, listTasks } from "./Redux/actions";
 
 import "../style.css";
 interface Props {
@@ -16,7 +15,7 @@ interface Props {
   currentPage: number;
   nextPage(): void;
   prevPage(): void;
-  deleteTaskReduxConfirm(id: number): number;
+  deleteTaskReduxConfirm(id: number): boolean;
   task: Task[];
   setTask: React.Dispatch<React.SetStateAction<Task[]>>;
 }
@@ -49,9 +48,9 @@ const Tasks: React.FC<Props> = ({
     return history.push("/gitrepositorieslists");
   }
 
-  useEffect(() => {
-    setTask(listTasks)
-  }, [deleteTaskReduxConfirm]);
+/*   useEffect(() => {
+    return () => setTask(listTasks);
+  }, [deleteTaskReduxConfirm]); */
 
   return (
     <div className="mainStyleViewTask">

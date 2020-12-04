@@ -8,6 +8,7 @@ export function deleteTask(payload: number) {
     type: types.deleteTask,
     payload,
   });
+  return true;
 }
 
 export function listTasks() {
