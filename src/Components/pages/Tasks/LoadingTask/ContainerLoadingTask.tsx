@@ -47,8 +47,6 @@ const ContainerLoadingTask: React.FC = () => {
     return false;
   }
 
-;
-
   return (
     <LoadingView
       paginate={paginate}
@@ -58,7 +56,6 @@ const ContainerLoadingTask: React.FC = () => {
       nextPage={nextPage}
       deleteTaskReduxConfirm={deleteTaskReduxConfirm}
       task={task}
-      setTask={setTask}
     />
   );
 };

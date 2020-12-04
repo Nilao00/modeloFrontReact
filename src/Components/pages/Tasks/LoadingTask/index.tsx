@@ -17,7 +17,6 @@ interface Props {
   prevPage(): void;
   deleteTaskReduxConfirm(id: number): boolean;
   task: Task[];
-  setTask: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 const Tasks: React.FC<Props> = ({
@@ -28,7 +27,6 @@ const Tasks: React.FC<Props> = ({
   nextPage,
   deleteTaskReduxConfirm,
   task,
-  setTask,
 }) => {
   const history = useHistory();
 
@@ -47,10 +45,6 @@ const Tasks: React.FC<Props> = ({
   function searchRepositoryGit() {
     return history.push("/gitrepositorieslists");
   }
-
-/*   useEffect(() => {
-    return () => setTask(listTasks);
-  }, [deleteTaskReduxConfirm]); */
 
   return (
     <div className="mainStyleViewTask">
