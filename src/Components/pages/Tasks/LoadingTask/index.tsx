@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useHistory } from "react-router-dom";
 
 import formatDate from "../../../../utils";
 import { Task } from "../../../../Interfaces/Task";
 import Paginate from "./paginate";
-
-import { deleteTask, listTasks } from "./Redux/actions";
 
 import "../style.css";
 interface Props {
@@ -18,7 +16,6 @@ interface Props {
   deleteTaskReduxConfirm(id: number): boolean;
   task: Task[];
 }
-
 const Tasks: React.FC<Props> = ({
   paginate,
   currentTasks,
